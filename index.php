@@ -1,3 +1,4 @@
-<?php 
-var_dump($_GET);
-?>
+<?php
+use App\Autoloader;
+require_once 'classes/Autoloader.php';
+Autoloader::register();
