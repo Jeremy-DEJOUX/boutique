@@ -18,7 +18,7 @@ class User
     public function ConnectUser($login, $password)
     {
 // On prépare la requête, on l'execute puis on fait un fetch pour récupérer les infos
-        $ConnectUser = $this->db->prepare("SELECT * FROM users WHERE login = :login");
+        $ConnectUser = $this->db->prepare("SELECT * FROM user WHERE login = :login");
         $ConnectUser->bindValue(':login', $login, PDO::PARAM_STR);
         $ConnectUser->execute();
         $user = $ConnectUser-fetch(PDO::FETCH_ASSOC);
@@ -32,7 +32,7 @@ class User
                 $this->password = $user['password'];
                 $_SESSION['id_droits'] = $user['id_droits'];
                 $_SESSION['utilisateur'] = $user;
-                $_SESSION['id'] = $user['id']
+                $_SESSION['id'] = $user['id'];
 // on regroupe le resultat du fetch dans un tableau de session
                 $_SESSION['utilisateur'] = [
                     'id' =>
@@ -42,7 +42,7 @@ class User
                     'password' =>
                         $this->password
                 ];
-                header('location:../index.php')
+                header('location:../index.php');
 
             }
             else {
@@ -74,7 +74,7 @@ class User
 
             if ($confirmPW==$password) {
                 $cryptedpass = password_hash($password, PASSWORD_BCRYPT); // CRYPTED 
-                $update = ($this->db)->prepare("UPDATE users SET login = :login, password = :cryptedpass, email= :mail WHERE id = :myID"); 
+                $update = ($this->db)->prepare("UPDATE user SET login = :login, password = :cryptedpass, email= :mail WHERE id = :myID"); 
                 $update->bindValue(":login", $login, PDO::PARAM_STR);
                 $update->bindValue(":cryptedpass",$cryptedpass, PDO::PARAM_STR);
                 $update->bindValue(":myID", $_SESSION['utilisateur']['id'], PDO::PARAM_INT);
@@ -85,10 +85,12 @@ class User
             } 
             else  $error_log="Confirmation du mot de passe incorrect";
         }
-        else {$error_log = "veuillez remplir les champs";}
+        else $error_log = "veuillez remplir les champs";
      
-     {if (isset ($error_log)) {
+     if (isset ($error_log)) {
         return $error_log;
-    }}
+    }
 
     }
+}
+?>
