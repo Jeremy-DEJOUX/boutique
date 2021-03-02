@@ -49,7 +49,7 @@ if (isset($_POST["connect"])){
 
 
 
-<form action="profil.php" method="POST" id="formulaire_edition" class="flex a_center column j_around">
+<form action="" method="POST" id="formulaire_edition" class="flex a_center column j_around">
 
             <section class="flex column a_center j_center">
                 <label for="newLogin">Nouveau pseudo</label>
