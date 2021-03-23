@@ -96,7 +96,7 @@ class User
                        $insert->bindValue(":cryptedpass", $cryptedpass, PDO::PARAM_STR);
                        $insert->bindValue(":email", $email, PDO::PARAM_STR); 
                     //    $insert->bindValue(); 
-                       $insert->execute(); 
+                       $insert->execute();
                        header('location:../index.php'); 
                     }
                     else {
