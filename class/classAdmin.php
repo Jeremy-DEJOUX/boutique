@@ -10,7 +10,7 @@ class Admin{
     }
 //------------------------------------------------------Donné les droits -------------------------------------------------------------------------------------
     public function updateDroits($login, $id_droits){
-        $query = $this->db->prepare("UPDATE utilisateur SET id_droits=:id WHERE id=:login")
+        $query = $this->db->prepare("UPDATE user SET id_droits=:id WHERE id=:login")
         $query->bindValue(":id", $id_droits, PDO::PARAM_INT);
         $query->bindValue(":login", $login, PDO::PARAM_STR);
         $query->execute();
@@ -81,7 +81,7 @@ class Admin{
             $update = ($this->db)->prepare("UPDATE user SET login = :login, password = :cryptedpass, email= :mail WHERE id = :myID"); 
             $update->bindValue(":login", $login, PDO::PARAM_STR);
             $update->bindValue(":cryptedpass",$cryptedpass, PDO::PARAM_STR);
-            $update->bindValue(":myID", $_SESSION['utilisateur']['id'], PDO::PARAM_INT);
+            $update->bindValue(":myID", $_SESSION['user']['id'], PDO::PARAM_INT);
             $update->bindValue(":mail",$email, PDO::PARAM_STR);
             
             $update->execute(); 
@@ -97,7 +97,7 @@ class Admin{
     public function deleteUser($login)
     {
 
-        $deleteQuery = $this->db->prepare("DELETE FROM utilisateurs WHERE id = :login");
+        $deleteQuery = $this->db->prepare("DELETE FROM user WHERE id = :login");
         $deleteQuery->bindValue(":login", $login, PDO::PARAM_INT);
         $deleteQuery->execute();
     }
