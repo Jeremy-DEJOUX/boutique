@@ -10,7 +10,7 @@ class Admin{
     }
 //------------------------------------------------------Donné les droits -------------------------------------------------------------------------------------
     public function updateDroits($login, $id_droits){
-        $query = $this->db->prepare("UPDATE utilisateur SET id_droits=:id WHERE id=:login")
+        $query = $this->db->prepare("UPDATE utilisateur SET id_droits=:id WHERE id=:login");
         $query->bindValue(":id", $id_droits, PDO::PARAM_INT);
         $query->bindValue(":login", $login, PDO::PARAM_STR);
         $query->execute();
@@ -24,5 +24,6 @@ class Admin{
         $email = htmlspecialchars(trim($email));
         $password =  htmlspecialchars(trim($password));
         $confirmPW =  htmlspecialchars(trim($confirmPW));
+    }
 }
 ?>
