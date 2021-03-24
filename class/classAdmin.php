@@ -20,10 +20,10 @@ class Admin{
 
         $error_log = null;
 
-        $login =  htmlspecialchars(trim($login));
-        $email = htmlspecialchars(trim($email));
-        $password =  htmlspecialchars(trim($password));
-        $confirmPW =  htmlspecialchars(trim($confirmPW));
+        $login     = htmlspecialchars(trim($login));
+        $email     = htmlspecialchars(trim($email));
+        $password  = htmlspecialchars(trim($password));
+        $confirmPW = htmlspecialchars(trim($confirmPW));
 
         if (!empty($login) && !empty($password) && !empty($confirmPW) && !empty($email) && !empty($id_droits)){
             
@@ -70,10 +70,10 @@ class Admin{
 //--------------------------------------------------------Update USER ADMIN----------------------------------------------------
     public function UpdateNewUser($old_login, $login, $email, $password, $confirmPW){
 
-        $login =  htmlspecialchars(trim($login));
-        $email = htmlspecialchars(trim($email));
-        $password =  htmlspecialchars(trim($password));
-        $confirmPW =  htmlspecialchars(trim($confirmPW));
+        $login     = htmlspecialchars(trim($login));
+        $email     = htmlspecialchars(trim($email));
+        $password  = htmlspecialchars(trim($password));
+        $confirmPW = htmlspecialchars(trim($confirmPW));
 
         if (!empty($login) && !empty($email) && !empty($password) && !empty($confirmPW)){
 
