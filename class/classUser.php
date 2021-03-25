@@ -125,7 +125,8 @@ class User
         $password =  htmlspecialchars(trim($password));
         $confirmPW =  htmlspecialchars(trim($confirmPW));
 
-        if (!empty($login) && !empty($email) && !empty($password) && !empty($confirmPW)){;
+        if (!empty($login) && !empty($email) && !empty($password) && !empty($confirmPW)){
+            
 
             if ($confirmPW==$password) {
                 $cryptedpass = password_hash($password, PASSWORD_BCRYPT); // CRYPTED 
