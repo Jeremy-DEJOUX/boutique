@@ -5,10 +5,10 @@ require_once('../class/classCategorie.php');
 require_once('../function/db.php');
 
 
-// if (isset($_POST['product'])) {
-//     $produits = new Product;
-//     $produits->create_Product($_POST['nom'], $_POST['desc'], $_POST['price'], $_POST['stock']);
-// }
+if (isset($_POST['product'])) {
+    $produits = new Product;
+    $produits->create_Product($_POST['nom'], $_POST['desc'], $_POST['price'], $_POST['stock'], $_POST['filetitle'], $_POST['filedesc'], $_FILES['fileupload']);
+}
 
 if (isset($_POST['category'])) {
     $category = new Categorie;
@@ -30,21 +30,14 @@ if (isset($_POST['category'])) {
 </head>
 <body>
     <main>
-        <form action="" method="post">
+        <form action="" method="post" enctype="multipart/form-data">
             <input type="text" name="nom" placeholder="Product Name...">
             <input type="text" name="desc" placeholder="Description...">
             <input type="number" name="price" placeholder="Prix...">
             <input type="number" step=".01" name="stock" placeholder="Stock...">
-
-            <label>Select Categorie</label>
-                    <select name="droitUser">
-                        <option>Select</option>
-                        <?php
-                        $droits = new Categorie();
-                        $droits->displayChoice();
-                        ?>
-            </select>
-
+            <input type="text" name="filetitle" placeholder="Image title...">
+            <input type="text" name="filedesc" placeholder="Image description...">
+            <input type="file" name="fileupload">
 
             <input type="submit" name="product" value="Envoyer">
 
