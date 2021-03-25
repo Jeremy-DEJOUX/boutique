@@ -10,7 +10,7 @@ class Admin{
     }
 //------------------------------------------------------Donné les droits -------------------------------------------------------------------------------------
     public function updateDroits($login, $id_droits){
-        $query = $this->db->prepare("UPDATE user SET id_droits=:id WHERE id=:login")
+        $query = $this->db->prepare("UPDATE user SET id_droits=:id WHERE id=:login");
         $query->bindValue(":id", $id_droits, PDO::PARAM_INT);
         $query->bindValue(":login", $login, PDO::PARAM_STR);
         $query->execute();
@@ -32,7 +32,7 @@ class Admin{
             $confirmLength = strlen($confirmPW); 
             $mailLength = strlen($email);
 
-            if(($logLength >= 2) && ($pathlenght >= 2) && ($confirmLength >= 2) && ($mailLength >= 2)){
+            if(($logLength >= 2) && ($passLength >= 2) && ($confirmLength >= 2) && ($mailLength >= 2)){
                 $checkLength = $this->db->prepare("SELECT login FROM user WHERE login=:login");
                 $checkLength->bindValue(":login", $login, PDO::PARAM_STR);
                 $checkLength->execute();
@@ -45,10 +45,10 @@ class Admin{
                         $cryptepass = password_hash($password, PASSWORD_BCRYPT);
                         $insert = $this->db->prepare("INSERT INTO user (login, password, email, id_droits ) VALUES (:login, :cryptepass, :email, :id_droits)");
                         $insert->bindValue(":login", $login, PDO::PARAM_STR);
-                        $insert->bindValue(":cryptedpass", $cryptedpass, PDO::PARAM_STR);
+                        $insert->bindValue(":cryptedpass", $cryptepass, PDO::PARAM_STR);
                         $insert->bindValue(":email", $email, PDO::PARAM_STR);
                         $insert->execute();
-                        echo "New user Added"
+                        echo "New user Added";
                     }
                     else {
                         $error_log = "confirmation du mot de passe incorrect"; 
