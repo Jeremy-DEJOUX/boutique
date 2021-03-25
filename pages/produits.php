@@ -3,11 +3,11 @@ require_once('../class/classProduits.php');
 require_once('../class/classCategorie.php');
 
 require_once('../function/db.php');
-
+$produits = new Product;
 
 if (isset($_POST['product'])) {
-    $produits = new Product;
-    $produits->create_Product($_POST['nom'], $_POST['desc'], $_POST['price'], $_POST['stock'], $_POST['filetitle'], $_POST['filedesc'], $_FILES['fileupload']);
+    
+    $produits->create_Product($_POST['nom'], $_POST['desc'], $_POST['price'], $_POST['stock'], $_POST['filetitle'], $_POST['filedesc'], $_FILES['fileupload'], $_POST['nom_cat']);
 }
 
 if (isset($_POST['category'])) {
@@ -39,6 +39,15 @@ if (isset($_POST['category'])) {
             <input type="text" name="filedesc" placeholder="Image description...">
             <input type="file" name="fileupload">
 
+            <label>Select Categorie</label>
+                    <select name="nom_cat">
+                        <option>Select</option>
+                            <?php
+                                $cat = new Categorie();
+                                $cat->displayChoice();
+                            ?>
+                    </select>
+
             <input type="submit" name="product" value="Envoyer">
 
 
@@ -52,6 +61,16 @@ if (isset($_POST['category'])) {
             <input type="text" name="nom_cat" placeholder="Category name...">
             <input type="submit" name="category" value="Envoyer">
         </form>
+
+
+        <div>
+            <?php
+                $produits->affichageProduits();               
+                echo "<img src='../ressources/img/" . $_SESSION['result'][0]['FullNameImg'] . "'>";
+                echo "<img src='../ressources/img/" . $_SESSION['result'][1]['FullNameImg'] . "'>"
+            ?>
+        </div>
+
     </main>
 </body>
 </html>

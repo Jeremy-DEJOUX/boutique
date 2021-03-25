@@ -30,7 +30,7 @@ class Product {
      * @param string $nameCategory
      * @return void
      */
-    public function create_Product(string $nom, string $desc, float $price, int $stock, $titleImg, $newFileName, $uploadfile){
+    public function create_Product(string $nom, string $desc, float $price, int $stock, string $titleImg, string $newFileName, $uploadfile, string $nom_cat){
         if (empty($nom) || empty($desc) || empty($price) || empty($stock)){
             echo "Il faut remplir tous les champs";
             exit();
@@ -85,8 +85,29 @@ class Product {
                         $stmt->execute();
     
                         move_uploaded_file($fileTempName, $fileDestination);
-    
-                    header("Location: ../pages/produits.php?upload=success");
+
+                        $sql = "SELECT * FROM produits WHERE nom = :nom";
+                        $stmt = $this->db->prepare($sql);
+                        $stmt->bindValue(':nom', $nom, PDO::PARAM_STR);
+                        $stmt->execute();
+                        $result_prod = $stmt->fetch(PDO::FETCH_ASSOC);
+                        var_dump($result_prod);
+
+                        $sql = "SELECT * FROM categories WHERE id = :nom";
+                        $stmt = $this->db->prepare($sql);
+                        $stmt->bindValue(':nom', $nom_cat, PDO::PARAM_INT);
+                        $stmt->execute();
+                        $result_cat = $stmt->fetch(PDO::FETCH_ASSOC);
+                        var_dump($result_cat);
+
+
+                        $sql = "INSERT INTO prod_cat (id_produits, id_categorie) VALUES (:id_produits, :id_categorie)";
+                        $stmt = $this->db->prepare($sql);
+                        $stmt->bindValue(':id_produits', $result_prod['id'], PDO::PARAM_INT);
+                        $stmt->bindValue(':id_categorie', $result_cat['id'], PDO::PARAM_INT);
+                        $stmt->execute();
+
+                        header("Location: ../pages/produits.php?upload=success");
                     }
                 } else {
                 echo "File size is too big";
@@ -101,5 +122,16 @@ class Product {
         exit();
     }
 
+    }
+
+
+
+    public function affichageProduits(){
+        $sql = "SELECT * FROM produits ORDER BY orderImg DESC";
+        $stmt = $this->db->query($sql);
+        
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        var_dump($result);
+        $_SESSION['result'] = $result;
     }
 }
