@@ -86,13 +86,13 @@ class Admin{
             
             $update->execute(); 
             }
-            else $error_log="Wrong confimation"
-        }
-        else $error_log = "veuillez remplir les champs";
-     
+            else{ $error_log = "veuillez remplir les champs";
+            }
+        
+        
      if (isset ($error_log)) {
         return $error_log;
-    }
+    }}
 //-----------------------------------------------------------------------------delete user-----------------------------------------------------------------------
     public function deleteUser($login)
     {
