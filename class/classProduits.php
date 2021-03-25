@@ -54,7 +54,7 @@ class Product {
                 $stmt->bindValue(':price', $price, PDO::PARAM_STR);
                 $stmt->bindValue(':stock', $stock, PDO::PARAM_INT);
                 $stmt->execute();
-                header('location:../pages/produits.php');
+                header('location:../pages/produits.php?=success');
             }
         }
 

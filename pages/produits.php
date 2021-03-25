@@ -1,12 +1,21 @@
 <?php
 require_once('../class/classProduits.php');
+require_once('../class/classCategorie.php');
+
 require_once('../function/db.php');
 
 
-if (isset($_POST['product'])) {
-    $produits = new Product;
-    $produits->create_Product($_POST['nom'], $_POST['desc'], $_POST['price'], $_POST['stock']);
+// if (isset($_POST['product'])) {
+//     $produits = new Product;
+//     $produits->create_Product($_POST['nom'], $_POST['desc'], $_POST['price'], $_POST['stock']);
+// }
+
+if (isset($_POST['category'])) {
+    $category = new Categorie;
+    $category->createCategory($_POST['nom_cat']);
+
 }
+
 
 
 ?>
@@ -35,6 +44,11 @@ if (isset($_POST['product'])) {
 
 
 
+        </form>
+
+        <form action="" method="post">
+            <input type="text" name="nom_cat" placeholder="Category name...">
+            <input type="submit" name="category" value="Envoyer">
         </form>
     </main>
 </body>
