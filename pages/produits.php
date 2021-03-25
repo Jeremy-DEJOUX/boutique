@@ -36,6 +36,15 @@ if (isset($_POST['category'])) {
             <input type="number" name="price" placeholder="Prix...">
             <input type="number" step=".01" name="stock" placeholder="Stock...">
 
+            <label>Select Categorie</label>
+                    <select name="droitUser">
+                        <option>Select</option>
+                        <?php
+                        $droits = new Categorie();
+                        $droits->displayChoice();
+                        ?>
+            </select>
+
 
             <input type="submit" name="product" value="Envoyer">
 
