@@ -129,9 +129,18 @@ class Product {
     public function affichageProduits(){
         $sql = "SELECT * FROM produits ORDER BY orderImg DESC";
         $stmt = $this->db->query($sql);
-        
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        var_dump($result);
         $_SESSION['result'] = $result;
+    }
+
+
+    public function produitsByCategory($categorie){
+        $categories = $this->db->prepare("SELECT * FROM prod_cat INNER JOIN produits p ON id_produits = p.id WHERE id_categorie = :id_categorie");
+        $categories->bindValue(':id_categorie', $categorie, PDO::PARAM_INT);
+        $categories->execute();
+        $result = $categories->fetchAll();
+        $_SESSION['categorie'] = $result;
+        var_dump($result); //{DEBUG}
+
     }
 }
