@@ -18,6 +18,8 @@ if (isset($_POST['category'])) {
 
 
 
+
+
 ?>
 
 <!DOCTYPE html>
@@ -64,11 +66,47 @@ if (isset($_POST['category'])) {
 
 
         <div>
-            <?php
-                $produits->affichageProduits();               
-                echo "<img src='../ressources/img/" . $_SESSION['result'][0]['FullNameImg'] . "'>";
-                echo "<img src='../ressources/img/" . $_SESSION['result'][1]['FullNameImg'] . "'>"
+            <?php                
+                if (isset($_POST['CategorieChoose'])){
+                    $produits = new Product;
+                    $produits->produitsByCategory($_POST['trieCategorie']);
+                    echo "<table class='flex column j_center a_center' id='tableauArt'>";
+                                foreach($_SESSION['categorie'] as $row){
+                                    echo 
+                                    "<tr>
+                                        <td>" . $row['nom'] . "</td>
+                                        <td>" . $row['description'] . "</td>
+                                        <td>" . $row['prix'] ."</td>
+                                        <td>" . $row['stock'] ."</td>
+                                    </tr>";
+                                }
+                                echo "</table>";
+                } else {
+                    $produits->affichageProduits();
+                    for ($i=0; $i < count($_SESSION['result']); $i++) { 
+                        echo 
+                            "<a href='produits.php?id=$i'>
+                                <img src='../ressources/img/" . $_SESSION['result'][$i]['FullNameImg'] . "'>
+                            </a>";
+                    }
+                }
+
             ?>
+        </div>
+
+
+        <div>
+                <form action="" method="post">
+                    <select name="trieCategorie">
+                        <option>Select</option>
+                            <?php
+                                $cat = new Categorie();
+                                $cat->displayChoice();
+                            ?>
+                    </select>
+
+                    <input type="submit" name="CategorieChoose" value="Filtrer">
+                </form>
         </div>
 
     </main>
