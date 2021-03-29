@@ -22,6 +22,8 @@ $panier = new Panier($db);
 
                 <a class="addPanier" href="addpanier.php?id=<?= $product->id; ?>">Ajouter au panier</a>
 
+                <a href="produit.php?id=<?= $product->id; ?>">Voir plus</a>
+
             </div>
         <?php endforeach; ?>
     </div>
