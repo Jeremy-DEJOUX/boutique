@@ -21,6 +21,18 @@ if (isset($_POST["connect"])){
         $user->register($_POST['login'],$_POST['email'], $_POST['password'], $_POST['confirmPW']); 
         $_SESSION['user']=$user; 
     }
+
+    $comment = new Comment;
+    $comment->displayComment($_GET['id']);
+    foreach($_SESSION['commentaire'] as $row){
+        echo 
+        "<tr>
+            <td>" . $row['login'] . "</td>
+            <td>" . $row['commentaire'] . "</td>
+            <td>" . $row['date'] ."</td>
+        </tr>";
+    }
+
 ?>
 <form id="formCom" action="" method='POST'>
             <label for="">Ajouter un commentaire</label><br>
