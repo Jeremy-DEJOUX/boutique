@@ -1,20 +1,26 @@
 <?php
 require_once('../class/classDb.php');
 require_once('../class/classPanier.php');
+require_once('../function/db.php');
 $db = new Db;
 $panier = new Panier($db);
-var_dump($_SESSION);
+var_dump($_SESSION['result']);
+
+
 ?>
 
 <?php
-
+$tab = [];
+foreach ($_SESSION['result'] as $row){
+        array_push($tab, $row['nom']);
+}
+// echo $tab[1], $tab[0];
 if (isset($_POST['confirmCommande'])) {
-    # code...
+    $commande = $panier->commande(1, $tab);
 }
 
 ?>
 <main>
-
 
     <div>
         <?php
@@ -50,3 +56,5 @@ if (isset($_POST['confirmCommande'])) {
 
 
 </main>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript" src="../ressources/JS/script.js"></script>

@@ -3,6 +3,7 @@
 <?php
 require_once('../class/classDb.php');
 require_once('../class/classPanier.php');
+require_once('../function/db.php');
 $db = new Db;
 $panier = new Panier($db);
 
