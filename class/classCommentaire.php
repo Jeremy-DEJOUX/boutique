@@ -14,7 +14,7 @@ class Comment{
     }
 
 //------------Ajout de commentaire-------------------
-    public function postComment($login, $comment){
+    public function postComment($login, $comment, $id){
         $errorCom = null;
         $secureComment = htmlspecialchars(trim($comment));
 

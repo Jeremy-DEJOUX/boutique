@@ -5,8 +5,8 @@ require_once("../function/db.php");
 require_once('../class/classCommentaire.php');
 require_once('../class/classUser.php');
 
-$login = $_SESSION['utilisateur'];
-if(isset($_POST["postComment"], $id)){
+$login = $_SESSION['user'];
+if(isset($_POST["postComment"])){
     $comment = new Comment;
     $comment->postComment($login, $_POST['comment'], $_GET['id']);
 }
