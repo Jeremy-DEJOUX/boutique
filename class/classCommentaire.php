@@ -1,10 +1,10 @@
 <?php
-
+require_once('../class/classDb.php');
 class Comment{
 
     private $id;
     public $comment;
-    private $idProd;
+    private $id_produit;
     public $date;
     private $idUser;
 
@@ -14,7 +14,7 @@ class Comment{
     }
 
 //------------Ajout de commentaire-------------------
-    public function postComment($login, $comment){
+    public function postComment($login, $comment, $id){
         $errorCom = null;
         $secureComment = htmlspecialchars(trim($comment));
 
@@ -22,10 +22,10 @@ class Comment{
             $comLength = strlen($comment);
 
             if(($comLength < 240)){
-                $insertCom = $this->db->prepare("INSERT INTO commentaire (id_user, commentaire, idProd, date) VALUES (:login, :commentaire, ;id_article, NOW())");
+                $insertCom = $this->db->prepare("INSERT INTO commentaires (id_user, commentaire, id_produit, date) VALUES (:login, :commentaire, :id_produit, NOW())");
                 $insertCom->bindValue(":login", $login['id'], PDO::PARAM_INT);
                 $insertCom->bindValue(":commentaire", $secureComment, PDO::PARAM_STR);
-                $insertCom->bindValue(":idProd", $_GET['id'], PDO::PARAM_INT);
+                $insertCom->bindValue(":id_produit", $id, PDO::PARAM_INT);
                 $insertCom->execute();
             }
             else{
@@ -37,7 +37,7 @@ class Comment{
 //---------------------------------------------display commentaire--------------------------
 
     public function displayComment($id){
-        $comment = $this->db->prepare("SELECT c.commentaire, c.date, c.id_user, c.id_produit, p.id, u.login FROM commentaires c INNER JOIN produits p ON c.id_produits = p.id INNER JOIN user u ON c.id_user = u.id WHERE p.id = :id");    
+        $comment = $this->db->prepare("SELECT c.commentaire, c.date, c.id_user, c.id_produit, p.id, u.login FROM commentaires c INNER JOIN produits p ON c.id_produit = p.id INNER JOIN user u ON c.id_user = u.id WHERE p.id = :id");    
         $comment->bindValue(':id', $id, PDO::PARAM_INT);
         $comment->execute();
         $result = $comment->fetchAll();

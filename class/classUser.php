@@ -31,10 +31,10 @@ class User
                 $this->login = $user['login'];
                 $this->password = $user['password'];
                 $_SESSION['id_droits'] = $user['id_droits'];
-                $_SESSION['utilisateur'] = $user;
+                $_SESSION['user'] = $user;
                 $_SESSION['id'] = $user['id'];
 // on regroupe le resultat du fetch dans un tableau de session
-                $_SESSION['utilisateur'] = [
+                $_SESSION['user'] = [
                     'id' =>
                         $this->id,
                     'login' =>
@@ -133,7 +133,7 @@ class User
                 $update = ($this->db)->prepare("UPDATE user SET login = :login, password = :cryptedpass, email= :mail WHERE id = :myID"); 
                 $update->bindValue(":login", $login, PDO::PARAM_STR);
                 $update->bindValue(":cryptedpass",$cryptedpass, PDO::PARAM_STR);
-                $update->bindValue(":myID", $_SESSION['utilisateur']['id'], PDO::PARAM_INT);
+                $update->bindValue(":myID", $_SESSION['user']['id'], PDO::PARAM_INT);
                 $update->bindValue(":mail",$email, PDO::PARAM_STR);
                 
                 $update->execute(); 
