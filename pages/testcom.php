@@ -6,9 +6,9 @@ require_once('../class/classCommentaire.php');
 require_once('../class/classUser.php');
 
 $login = $_SESSION['utilisateur'];
-if(isset($_POST["postComment"])){
+if(isset($_POST["postComment"], $id)){
     $comment = new Comment;
-    $comment->postComment($login, $_POST['comment']);
+    $comment->postComment($login, $_POST['comment'], $_GET['id']);
 }
 
 if (isset($_POST["connect"])){
@@ -22,7 +22,7 @@ if (isset($_POST["connect"])){
         $_SESSION['user']=$user; 
     }
 ?>
-<form id="formCom" action="" method=GET>
+<form id="formCom" action="" method='POST'>
             <label for="">Ajouter un commentaire</label><br>
             <textarea name="comment" id="" cols="30" rows="10"></textarea><br>
             <input type="submit" name="postComment" value="commenter">

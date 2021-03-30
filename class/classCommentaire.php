@@ -22,10 +22,10 @@ class Comment{
             $comLength = strlen($comment);
 
             if(($comLength < 240)){
-                $insertCom = $this->db->prepare("INSERT INTO commentaire (id_user, commentaire, id_produit, date) VALUES (:login, :commentaire, ;id_article, NOW())");
+                $insertCom = $this->db->prepare("INSERT INTO commentaires (id_user, commentaire, id_produit, date) VALUES (:login, :commentaire, :id_produit, NOW())");
                 $insertCom->bindValue(":login", $login['id'], PDO::PARAM_INT);
                 $insertCom->bindValue(":commentaire", $secureComment, PDO::PARAM_STR);
-                $insertCom->bindValue(":id_produit", $_GET['id'], PDO::PARAM_INT);
+                $insertCom->bindValue(":id_produit", $id, PDO::PARAM_INT);
                 $insertCom->execute();
             }
             else{
