@@ -6,7 +6,13 @@ $panier = new Panier($db);
 var_dump($_SESSION);
 ?>
 
+<?php
 
+if (isset($_POST['confirmCommande'])) {
+    # code...
+}
+
+?>
 <main>
 
 
@@ -35,6 +41,10 @@ var_dump($_SESSION);
         <p>Somme des produits <?= $panier->count(); ?> </p>
 
         <p>Prix total du panier <?= number_format($panier->total(), 2); ?></p>
+        
+        <form action="" method="post">
+            <button name="confirmCommande">Confirmez la Commande</button>
+        </form>
     </div>
 
 
