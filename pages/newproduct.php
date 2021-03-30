@@ -1,6 +1,9 @@
+
+
 <?php
 require_once('../class/classDb.php');
 require_once('../class/classPanier.php');
+require_once('../function/db.php');
 $db = new Db;
 $panier = new Panier($db);
 
@@ -21,6 +24,8 @@ $panier = new Panier($db);
                 <img src="../ressources/img/<?=$product->FullNameImg ?>" alt="">
 
                 <a class="addPanier" href="addpanier.php?id=<?= $product->id; ?>">Ajouter au panier</a>
+
+                <a href="produit.php?id=<?= $product->id; ?>">Voir plus</a>
 
             </div>
         <?php endforeach; ?>

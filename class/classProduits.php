@@ -149,7 +149,7 @@ class Product {
             $search = $_POST['search'];
             $sql = "SELECT * FROM produits WHERE nom LIKE '%$search%' OR
             description LIKE '%$search%' OR prix LIKE '%$search%'";
-            $stmt=connect()->prepare($sql);
+            $stmt=$this->db->prepare($sql);
             $stmt->execute();
             $queryResult = $stmt->fetchAll();
             var_dump($queryResult);
@@ -165,5 +165,16 @@ class Product {
                 echo "no results";
             }
         }
+    }
+
+
+    public function ProduitById($id){
+        $article = $this->db->prepare("SELECT produits.nom, description, prix, stock, titleImg, FullNameImg, orderImg, c.nom_cat
+        FROM produits INNER JOIN prod_cat p ON id = p.id_produits  INNER JOIN categories c ON p.id_categorie = c.id WHERE produits.id = :id");
+        $article->bindValue(':id', $id, PDO::PARAM_INT);
+        $article->execute();
+        $result = $article->fetchAll(PDO::FETCH_OBJ);
+        var_dump($result);
+        $_SESSION['produit'] = $result;
     }
 }
