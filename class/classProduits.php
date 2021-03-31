@@ -177,4 +177,99 @@ class Product {
         var_dump($result);
         $_SESSION['produit'] = $result;
     }
+
+    public function modifProduit($id, $nom, $description, $prix, $stock, $titleImg, $newFileName, $uploadfile){
+        if (empty($nom) || empty($description) || empty($prix) || empty($stock)){
+            echo "Il faut remplir tous les champs";
+            exit();
+
+        } elseif ($prix < 0 || $stock < 0) {
+            echo "Erreur au niveaux du stock ou du prix";
+
+        } elseif (empty($newFileName)) {
+            $newFileName = "img";
+
+        } else{
+            $newFileName = strtolower(str_replace(" ", "-", $newFileName));
+        }
+
+        $file = $uploadfile;
+        $fileName      = $file['name'];
+        $fileType      = $file['type'];
+        $fileTempName  = $file['tmp_name'];
+        $fileError     = $file['error'];
+        $fileSize      = $file['size'];
+
+        $fileExt       = explode(".", $fileName);
+        $fileActualExt = strtolower(end($fileExt));
+
+        $allowed       = array("jpg", "jpeg", "png");
+
+        if (in_array($fileActualExt, $allowed)) {
+            if ($fileError === 0){
+                if ($fileSize < 2000000) {
+                    $imageFullName = $newFileName . "." . uniqid("", true) . "." . $fileActualExt;
+                    $fileDestination = "../ressources/img/" . $imageFullName;
+    
+                    if (empty($titleImg)) {
+                        echo "Votre image doit avoir un Titre";
+                        header("Location: ../pages/produits.php?upload=empty");
+                        exit();
+                    } else{
+                        $sql = "SELECT * FROM produits";
+                        $stmt = $this->db->query($sql);
+                        $rowCount = $stmt->fetchColumn();
+                        $setImageOrder = $rowCount + 1;
+                        $sql = "SELECT * FROM produits WHERE id = :id";
+                        $query = $this->db->prepare($sql);
+                        $query->bindValue(':id', $id, PDO::PARAM_INT);
+                        $query->execute();
+
+                        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+                        var_dump($result);
+
+                        $sql = "UPDATE produits SET nom = :nom, description = :description, prix = :prix, stock = :stock, titleImg = :titleImg, FullNameImg = :FullNameImg, orderImg = :order WHERE id = :id";
+                        $update = $this->db->prepare($sql);
+                        $update->bindValue(':nom', $nom, PDO::PARAM_STR);
+                        $update->bindValue(':description', $description, PDO::PARAM_STR);
+                        $update->bindValue(':prix', $prix, PDO::PARAM_STR);
+                        $update->bindValue(':stock', $stock, PDO::PARAM_INT);
+                        $update->bindValue(':titleImg', $titleImg, PDO::PARAM_STR);
+                        $update->bindValue(':FullNameImg', $imageFullName, PDO::PARAM_STR);
+                        $update->bindValue(':order', $setImageOrder, PDO::PARAM_INT);
+                        $update->bindValue(':id', $id, PDO::PARAM_INT);
+                        $update->execute();
+
+                        move_uploaded_file($fileTempName, $fileDestination);
+                    }
+                }
+            }
+        }
+    }
+
+    public function deleteProd($id){
+        $delete = $this->db->prepare("DELETE FROM produits WHERE id = :id");
+        $delete->bindValue(":id", $id, PDO::PARAM_INT);
+        $delete->execute();
+    }
+
+
+    public function getProd(){
+        $i = 0;
+        $choice = $this->db->prepare("SELECT * FROM produits");
+        $choice->execute();
+        while($fetch = $choice->fetch(PDO::FETCH_ASSOC)){
+            $tableau[$i][] = $fetch['id'];
+            $tableau[$i][] = $fetch['nom'];
+            $i++;
+        }
+        return $tableau;
+    }
+    public function displayProd(){
+        $modelDroit = new Product;
+        $tableau = $modelDroit->getProd();
+        foreach($tableau as $value){
+            echo '<option value="'.$value[0].'">'.$value[1] .'</option>';
+        }
+    }
 }

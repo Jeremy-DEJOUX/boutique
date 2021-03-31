@@ -23,7 +23,7 @@ class Categorie{
             exit();
 
         } else {
-            $stmt = $this->db->prepare("SELECT * FROM categories WHERE nom = :nom");
+            $stmt = $this->db->prepare("SELECT * FROM categories WHERE nom_cat = :nom");
             $stmt->bindValue(':nom', $name, PDO::PARAM_STR);
             $stmt->execute();
             $count = $stmt->fetch();
@@ -33,7 +33,7 @@ class Categorie{
                 exit();
 
             } else {
-                $stmt = $this->db->prepare("INSERT INTO categories (nom) VALUES (:nom)");
+                $stmt = $this->db->prepare("INSERT INTO categories (nom_cat) VALUES (:nom)");
                 $stmt->bindValue(':nom', $name, PDO::PARAM_STR);
                 $stmt->execute();
                 header('Location: ../pages/produits.php?=success');
@@ -47,7 +47,7 @@ class Categorie{
         $choice->execute();
         while($fetch = $choice->fetch(PDO::FETCH_ASSOC)){
             $tableau[$i][] = $fetch['id'];
-            $tableau[$i][] = $fetch['nom'];
+            $tableau[$i][] = $fetch['nom_cat'];
             $i++;
         }
         return $tableau;
@@ -58,6 +58,12 @@ class Categorie{
         foreach($tableau as $value){
             echo '<option value="'.$value[0].'">'.$value[1] .'</option>';
         }
+    }
+
+    public function deleteCat($id){
+        $delete = $this->db->prepare("DELETE FROM categories WHERE id = :id");
+        $delete->bindValue(":id", $id, PDO::PARAM_INT);
+        $delete->execute();
     }
 }
 
