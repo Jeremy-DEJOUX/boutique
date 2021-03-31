@@ -170,7 +170,7 @@ class Product {
 
     public function ProduitById($id){
         $article = $this->db->prepare("SELECT produits.nom, description, prix, stock, titleImg, FullNameImg, orderImg, c.nom_cat
-        FROM produits INNER JOIN prod_cat p ON id = p.id_produits  INNER JOIN categories c ON p.id_categorie = c.id WHERE produits.id = :id");
+        FROM produits INNER JOIN prod_cat p ON produits.id = p.id_produits  INNER JOIN categories c ON p.id_categorie = c.id WHERE produits.id = :id");
         $article->bindValue(':id', $id, PDO::PARAM_INT);
         $article->execute();
         $result = $article->fetchAll(PDO::FETCH_OBJ);

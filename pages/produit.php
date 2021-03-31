@@ -55,7 +55,11 @@ $panier = new Panier($db);
         }
     
      ?>
-
+        <form id="formCom" action="" method='POST'>
+            <label for="">Ajouter un commentaire</label><br>
+            <textarea name="comment" id="" cols="30" rows="10"></textarea><br>
+            <input type="submit" name="postComment" value="commenter">
+        </form>
 </main>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript" src="../ressources/JS/script.js"></script>
