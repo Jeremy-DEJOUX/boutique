@@ -16,7 +16,17 @@ if (isset($_POST['category'])) {
 
 }
 
+if (isset($_POST['modifProd'])){
+    $produits->modifProduit($_POST['id_prod'],$_POST['nameProd'], $_POST['desc'], $_POST['prix'], $_POST['stock'], $_POST['titleImg'], $_POST['descImg'], $_FILES['fileupload']);
+}
 
+if (isset($_POST['deleteProd'])) {
+    $produits->deleteProd($_POST['id_prod']);
+}
+if (isset($_POST['delete_cat'])){
+    $category = new Categorie;
+    $category->deleteCat($_POST['deleteCat']);
+}
 
 
 
@@ -32,6 +42,8 @@ if (isset($_POST['category'])) {
 </head>
 <body>
     <main>
+
+    <h1>CREATION DE PRODUITS</h1>
         <form action="" method="post" enctype="multipart/form-data">
             <input type="text" name="nom" placeholder="Product Name...">
             <input type="text" name="desc" placeholder="Description...">
@@ -42,28 +54,28 @@ if (isset($_POST['category'])) {
             <input type="file" name="fileupload">
 
             <label>Select Categorie</label>
-                    <select name="nom_cat">
-                        <option>Select</option>
-                            <?php
-                                $cat = new Categorie();
-                                $cat->displayChoice();
-                            ?>
-                    </select>
+                <select name="nom_cat">
+                    <option>Select</option>
+                        <?php
+                            $cat = new Categorie();
+                            $cat->displayChoice();
+                        ?>
+                </select>
 
             <input type="submit" name="product" value="Envoyer">
 
+        </form> <br><br><br>
 
 
 
-
-
-        </form>
-
+<h1>CREATION DE CATEGORIE</h1>
         <form action="" method="post">
             <input type="text" name="nom_cat" placeholder="Category name...">
             <input type="submit" name="category" value="Envoyer">
-        </form>
+        </form> <br><br><br>
 
+
+    <h1>AFFICAHGE DES PRODUITS</h1>
 
         <div>
             <?php                
@@ -92,8 +104,10 @@ if (isset($_POST['category'])) {
                 }
 
             ?>
-        </div>
+        </div> <br><br><br><br>
 
+
+                <h1>FILTRER LES CATEGORIES</h1>
 
         <div>
                 <form action="" method="post">
@@ -107,7 +121,46 @@ if (isset($_POST['category'])) {
 
                     <input type="submit" name="CategorieChoose" value="Filtrer">
                 </form>
-        </div>
+        </div> <br><br><br><br>
+
+                <h1>MODIFICATION SUPPRESSION PRODUITS</h1>
+        <form action="" method="post" enctype="multipart/form-data">
+            <label>Select Categorie</label>
+            <select name="id_prod">
+                <option>Select</option>
+                    <?php
+                        $cat = new Product();
+                        $cat->displayProd();
+                    ?>
+            </select>
+            <input type="text" name="nameProd" placeholder="Nom du produit...">
+            <input type="text" name="desc" placeholder="Description...">
+            <input type="number" name="prix" placeholder="Prix...">
+            <input type="number" name="stock" placeholder="Stock...">
+            <input type="text" name="titleImg" placeholder="Titre IMG...">
+            <input type="text" name="descImg" placeholder="Description img...">
+            <input type="file" name="fileupload">
+
+            <input type="submit" name="modifProd" value="Envoyer">
+            <input type="submit" name="deleteProd" value="Supprimer">
+        </form>
+ <br><br><br><br>
+
+
+ <h1>SUPPRESSION DE CATEGORIE</h1>
+
+ <form action="" method="post">
+    <select name="deleteCat">
+        <option>Select</option>
+            <?php
+                $cat = new Categorie();
+                $cat->displayChoice();
+            ?>
+    </select>
+    <input type="submit" value="Supprimer" name="delete_cat">
+ </form>
+
+
 
     </main>
 </body>
