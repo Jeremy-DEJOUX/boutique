@@ -48,20 +48,17 @@ if (isset($_POST["connect"])){
         <label for="password" name="password">Mot de passe</label>
         <input type="password" name="password">
         <input type="submit" name="connect" value="go!">
-
     </form>
 
-    <form  id="form_register" action="" method="POST">
-
-<label for="login">Login</label>
-<input type="text" name="login">
-<label for="email">Email</label>
-<input type="email" name="email">
-<label for="password" name="password">Mot de passe</label>
-<input type="password" name="password">
-<label for="confirmPW">Confirmz vote mot de passe</label>
-<input type="password" name="confirmPW">
-<input type="submit" name="register" value="go!">
-
+<form  id="form_register" action="" method="POST">
+    <label for="login">Login</label>
+    <input type="text" name="login">
+    <label for="email">Email</label>
+    <input type="email" name="email">
+    <label for="password" name="password">Mot de passe</label>
+    <input type="password" name="password">
+    <label for="confirmPW">Confirmz vote mot de passe</label>
+    <input type="password" name="confirmPW">
+    <input type="submit" name="register" value="go!">
 </form>
 
