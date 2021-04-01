@@ -4,20 +4,24 @@ require_once('../class/classPanier.php');
 require_once('../function/db.php');
 $db = new Db;
 $panier = new Panier($db);
-var_dump($_SESSION['result']);
+var_dump($_SESSION);
 
 
 ?>
 
 <?php
-$tab = [];
-foreach ($_SESSION['result'] as $row){
+
+if (isset($_SESSION['result'])) {
+    $tab = [];
+    foreach ($_SESSION['result'] as $row){
         array_push($tab, $row['nom']);
-}
-// echo $tab[1], $tab[0];
-if (isset($_POST['confirmCommande'])) {
+    }
+    if (isset($_POST['confirmCommande'])) {
     $commande = $panier->commande(1, $tab);
+    }
 }
+
+
 
 ?>
 <main>
