@@ -3,6 +3,7 @@ require_once('../class/classProduits.php');
 require_once('../function/db.php');
 require_once('../class/classPanier.php');
 require_once('../class/classDb.php');
+require_once('../class/classCommentaire.php');
 $db = new Db;
 $panier = new Panier($db);
 ?>
@@ -18,7 +19,9 @@ $panier = new Panier($db);
         if (isset($_GET['id'])):
             $produit = new Product();
             $produit->ProduitById($_GET['id']);
-            foreach ($_SESSION['produit'] as $row): ; ?>
+            foreach ($_SESSION['produit'] as $row): ; 
+           
+    ?>
                
             
                 <div>
@@ -32,7 +35,31 @@ $panier = new Panier($db);
 
             
      <?php endif; ?>
-
+     <?php
+        $login = $_SESSION['user'];
+        if(isset($_POST["postComment"])){
+            $comment = new Comment;
+            $comment->postComment($login, $_POST['comment'], $_GET['id']);
+        }
+        $comment = new Comment;
+        $comment->displayComment($_GET['id']);
+        foreach($_SESSION['commentaire'] as $row){
+            echo 
+            "<div>
+                <tr>
+                    <td>" . $row['login'] . "</td>
+                    <td>" . $row['commentaire'] . "</td>
+                    <td>" . $row['date'] ."</td>
+                </tr>
+            </div>";
+        }
+    
+     ?>
+        <form id="formCom" action="" method='POST'>
+            <label for="">Ajouter un commentaire</label><br>
+            <textarea name="comment" id="" cols="30" rows="10"></textarea><br>
+            <input type="submit" name="postComment" value="commenter">
+        </form>
 </main>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript" src="../ressources/JS/script.js"></script>
