@@ -23,6 +23,17 @@ if (isset($_POST['category'])) {
     $category = new Categorie;
     $category->createCategory($_POST['nom_cat']);
 }
+if (isset($_POST['modifProd'])){
+    $produits->modifProduit($_POST['id_prod'],$_POST['nameProd'], $_POST['desc'], $_POST['prix'], $_POST['stock'], $_POST['titleImg'], $_POST['descImg'], $_FILES['fileupload']);
+}
+
+if (isset($_POST['deleteProd'])) {
+    $produits->deleteProd($_POST['id_prod']);
+}
+if (isset($_POST['delete_cat'])){
+    $category = new Categorie;
+    $category->deleteCat($_POST['deleteCat']);
+}
 ?>
 
 <!DOCTYPE html>
@@ -69,21 +80,6 @@ if (isset($_POST['category'])) {
                                 $cat->displayChoice();
                             ?>
                     </select>
-
-                <?php
-                    $query = "SELECT * FROM categories";
-                    $stmt = connect()->query($query);
-                    $result = $stmt->fetchAll(pdo::FETCH_ASSOC);
-                    // var_dump($result); 
-                    for ($i=0; $i < COUNT($result) ; $i++) { 
-                       echo 
-                            "<label>" . $result[$i]['nom'] . "</label> 
-                            <input type='checkbox' name=''id=''>";
-                    }
-                
-                
-                ?>
-
             <input type="submit" name="product" value="Envoyer">
         </form>
 
@@ -95,8 +91,41 @@ if (isset($_POST['category'])) {
             <input type="text" name="nom_cat" placeholder="Category name...">
             <input type="submit" name="category" value="Envoyer">
         </form>
+        
+        <form action="" method="post" enctype="multipart/form-data">
+            <label>Select Categorie</label>
+            <select name="id_prod">
+                <option>Select</option>
+                    <?php
+                        $cat = new Product();
+                        $cat->displayProd();
+                    ?>
+            </select>
+            <input type="text" name="nameProd" placeholder="Nom du produit...">
+            <input type="text" name="desc" placeholder="Description...">
+            <input type="number" name="prix" placeholder="Prix...">
+            <input type="number" name="stock" placeholder="Stock...">
+            <input type="text" name="titleImg" placeholder="Titre IMG...">
+            <input type="text" name="descImg" placeholder="Description img...">
+            <input type="file" name="fileupload">
 
+            <input type="submit" name="modifProd" value="Envoyer">
+            <input type="submit" name="deleteProd" value="Supprimer">
+        </form>
 
+        <form  id="createUser" action="" method="POST">
+            <label for="login">Login</label>
+            <input type="text" name="login">
+            <label for="email">Email</label>
+            <input type="email" name="email">
+            <label for="password" name="password">Mot de passe</label>
+            <input type="password" name="password">
+            <label for="confirmPW">Confirmz vote mot de passe</label>
+            <input type="password" name="confirmPW">
+            <input type="submit" name="register" value="go!">
+        </form>
+
+        
     </main>
 </body>
 </html>
