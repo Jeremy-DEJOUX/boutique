@@ -157,9 +157,17 @@ public function getUser(){
         $tableau[$i][] = $fetch['login'];
         $i++;
     }
-    
     return $tableau;
 }
+
+public function getDisplay(){
+    $display = new User();
+    $tableau = $display->getUser();
+    foreach($tableau as $value){
+        echo '<option values"' .$value[0] . '">' . $value[1] . '</option>';
+    }
+}
+
 public function updateDroit($login, $id_droits){
     $update = $this->db->prepare("UPDATE user SET id_droits = :id_droits WHERE id = :login");
     $update->bindValue(":login", $login, PDO::PARAM_STR);

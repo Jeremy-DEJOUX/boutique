@@ -101,5 +101,7 @@ class Admin{
         $deleteQuery->bindValue(":login", $login, PDO::PARAM_INT);
         $deleteQuery->execute();
     }
+
+    
 }
 ?>  
