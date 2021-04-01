@@ -3,6 +3,7 @@ $database = ("../function/db.php");
 require_once("../class/classAdmin.php");
 require_once('../class/classProduits.php');
 require_once('../class/classCategorie.php');
+require_once('../class/classUser.php');
 
 //-----------------------chemin-----------------
 
