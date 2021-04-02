@@ -1,10 +1,9 @@
 <?php
-
+require_once('../function/db.php');
 class Admin{
     public $login;
     public $password;
-    public $id_droits;
-    public $db;
+    public $id_dorits;
 
     public function __contruct(){
         $this->db = connect();
@@ -34,7 +33,7 @@ class Admin{
             $mailLength = strlen($email);
 
             if(($logLength >= 2) && ($passLength >= 2) && ($confirmLength >= 2) && ($mailLength >= 2)){
-                $checkLength = connect()->prepare("SELECT login FROM user WHERE login=:login");
+                $checkLength = $this->db->prepare("SELECT login FROM user WHERE login=:login");
                 $checkLength->bindValue(":login", $login, PDO::PARAM_STR);
                 $checkLength->execute();
                 $count = $checkLength->fetch();
@@ -42,13 +41,12 @@ class Admin{
                 if(!$count){
 
                     if ($password == $confirmPW){
-                        
+
                         $cryptepass = password_hash($password, PASSWORD_BCRYPT);
-                        $insert = connect()->prepare("INSERT INTO user (login, password, email, id_droits ) VALUES (:login, :cryptedpass, :email, :id_droits)");
+                        $insert = $this->db->prepare("INSERT INTO user (login, password, email, id_droits ) VALUES (:login, :cryptepass, :email, :id_droits)");
                         $insert->bindValue(":login", $login, PDO::PARAM_STR);
                         $insert->bindValue(":cryptedpass", $cryptepass, PDO::PARAM_STR);
                         $insert->bindValue(":email", $email, PDO::PARAM_STR);
-                        $insert->bindValue(":id_droits", $id_droits, PDO::PARAM_INT);
                         $insert->execute();
                         echo "New user Added";
                     }
@@ -79,17 +77,14 @@ class Admin{
 
         if (!empty($login) && !empty($email) && !empty($password) && !empty($confirmPW)){
 
-            var_dump($old_login);
-
             $cryptedpass = password_hash($password, PASSWORD_BCRYPT); // CRYPTED 
-            $update = connect()->prepare("UPDATE user SET login = :login, password = :cryptedpass, email= :mail WHERE login = :old_login"); 
+            $update = ($this->db)->prepare("UPDATE user SET login = :login, password = :cryptedpass, email= :mail WHERE id = :myID"); 
             $update->bindValue(":login", $login, PDO::PARAM_STR);
             $update->bindValue(":cryptedpass",$cryptedpass, PDO::PARAM_STR);
-            $update->bindValue(":old_login", $old_login, PDO::PARAM_STR);
+            $update->bindValue(":myID", $_SESSION['user']['id'], PDO::PARAM_INT);
             $update->bindValue(":mail",$email, PDO::PARAM_STR);
             
-            $update->execute();
-
+            $update->execute(); 
             }
             else{ $error_log = "veuillez remplir les champs";
             }
@@ -102,11 +97,11 @@ class Admin{
     public function deleteUser($login)
     {
 
-        $deleteQuery = connect()->prepare("DELETE FROM user WHERE login = :login");
-        $deleteQuery->bindValue(":login", $login, PDO::PARAM_STR);
+        $deleteQuery = $this->db->prepare("DELETE FROM user WHERE id = :login");
+        $deleteQuery->bindValue(":login", $login, PDO::PARAM_INT);
         $deleteQuery->execute();
     }
 
-
+    
 }
 ?>  
