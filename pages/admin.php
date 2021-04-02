@@ -180,7 +180,4 @@ if(isset($_POST['deleteUser'])){
     </main>
 </body>
 </html>
-
-<?php
-// }
-?>
+<?php } ?>
