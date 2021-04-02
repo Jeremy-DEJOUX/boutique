@@ -140,7 +140,43 @@ if(isset($_POST['deleteUser'])){
                     </select>
                     <input type="submit" name="mod" value="Envoyer">
                     <input type="submit" name="deleteUser" value="Supprimer">
-        </form>        
+        </form>   
+        <h1>MODIFICATION SUPPRESSION PRODUITS</h1>
+        <form action="" method="post" enctype="multipart/form-data">
+            <label>Select Categorie</label>
+            <select name="id_prod">
+                <option>Select</option>
+                    <?php
+                        $cat = new Product();
+                        $cat->displayProd();
+                    ?>
+            </select>
+            <input type="text" name="nameProd" placeholder="Nom du produit...">
+            <input type="text" name="desc" placeholder="Description...">
+            <input type="number" name="prix" placeholder="Prix...">
+            <input type="number" name="stock" placeholder="Stock...">
+            <input type="text" name="titleImg" placeholder="Titre IMG...">
+            <input type="text" name="descImg" placeholder="Description img...">
+            <input type="file" name="fileupload">
+
+            <input type="submit" name="modifProd" value="Envoyer">
+            <input type="submit" name="deleteProd" value="Supprimer">
+        </form>
+ <br><br><br><br>
+
+
+ <h1>SUPPRESSION DE CATEGORIE</h1>
+
+ <form action="" method="post">
+    <select name="deleteCat">
+        <option>Select</option>
+            <?php
+                $cat = new Categorie();
+                $cat->displayChoice();
+            ?>
+    </select>
+    <input type="submit" value="Supprimer" name="delete_cat">
+ </form>     
     </main>
 </body>
 </html>
