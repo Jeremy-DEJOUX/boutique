@@ -181,6 +181,4 @@ if(isset($_POST['deleteUser'])){
 </body>
 </html>
 
-<?php
-// }
-?>
+<?php } ?>
