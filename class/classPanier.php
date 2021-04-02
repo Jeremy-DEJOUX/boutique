@@ -55,7 +55,7 @@ class Panier{
 
         if ($commande) {
 
-            $prod = connect()->prepare("SELECT * FROM commandes WHERE id_user = :id");
+            $prod = connect()->prepare("SELECT * FROM commandes INNER JOIN (SELECT id_user, MAX(date) AS MaxDateTime FROM commandes GROUP BY id_user) groupedtt ON commandes.id_user = groupedtt.id_user AND date = groupedtt.MaxDateTime WHERE commandes.id_user = :id");
             $prod->bindValue(':id', $id, PDO::PARAM_STR);
             $prod->execute();
             $result_com = $prod->fetch(PDO::FETCH_ASSOC);
@@ -72,8 +72,10 @@ class Panier{
                 $commande->bindValue(':id_produits', $result_prod['id'], PDO::PARAM_INT);
                 $commande->bindValue(':id_commande', $result_com['id'], PDO::PARAM_INT);
                 $commande->execute();
-                $final = $commande->fetch(PDO::FETCH_ASSOC);
 
+                if ($commande) {
+                    $_SESSION['panier'] = [];
+                }
             }
 
 

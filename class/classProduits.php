@@ -61,6 +61,7 @@ class Product {
             if ($fileError === 0){
                 if ($fileSize < 2000000) {
                     $imageFullName = $newFileName . "." . uniqid("", true) . "." . $fileActualExt;
+                    $imageFullName = str_replace("/", "_", $imageFullName);
                     $fileDestination = "../ressources/img/" . $imageFullName;
     
                     if (empty($titleImg)) {
