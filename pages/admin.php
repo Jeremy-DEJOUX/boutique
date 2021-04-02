@@ -1,9 +1,10 @@
 <?php
-$database = ("../function/db.php");
+require_once("../function/db.php");
 require_once("../class/classAdmin.php");
 require_once('../class/classProduits.php');
 require_once('../class/classCategorie.php');
 require_once('../class/classUser.php');
+require_once('../class/classDroits.php');
 
 //-----------------------chemin-----------------
 
@@ -15,7 +16,7 @@ require_once('../class/classUser.php');
 // else{
 
 $produits = new Product;
-
+//------------------------------------------PRODUITS---------------------------------
 if (isset($_POST['product'])) {
     $produits->create_Product($_POST['nom'], $_POST['desc'], $_POST['price'], $_POST['stock'], $_POST['filetitle'], $_POST['filedesc'], $_FILES['fileupload'], $_POST['nom_cat']);
 }
@@ -35,6 +36,21 @@ if (isset($_POST['delete_cat'])){
     $category = new Categorie;
     $category->deleteCat($_POST['deleteCat']);
 }
+//-----------------------------------------USER---------------------------------------------
+if(isset($_POST['mod'])){
+                $droits = new User();
+                $droits->updateDroit($_POST['moddingUser'], $_POST['droitUser']);
+                $update = new Admin();
+                $update->UpdateNewUser($_POST['moddingUser'], $_POST['UpdateLog'], $_POST['UpdateMail'], $_POST['updatePW'], $_POST['updateCPW']);
+            }
+if(isset($_POST['createUser'])){
+    $create = new Admin;
+    $create->registerNewUser($_POST['createLogin'], $_POST['eMail'], $_POST['createPW'], $_POST['confirmPW'], $_POST['droitsNewUser']);
+}
+if(isset($_POST['deleteUser'])){
+    $delete = new Admin();
+    $delete->deleteUser($_POST['moddingUser']);
+}
 ?>
 
 <!DOCTYPE html>
@@ -47,22 +63,6 @@ if (isset($_POST['delete_cat'])){
 </head>
 <body>
     <main>
-        <?php
-            if(isset($_POST['mod'])){
-                $update = new Admin();
-                $update->UpdateNewUser($_POST['moddingUser'], $_POST['UpdateLog'], $_POST['UpdateMail'], $_POST['updatePW'], $_POSt['updateCPW']);
-            }
-            if(isset($_POST['createUser'])){
-                $create = new Admin();
-                $create->registerNewUser($_POST['createLogin'], $_POST['eMail'], $_POST['createPW'], $_POST['confirmPW'], $_POST['droitsNewUser']);
-            }
-            if(isset($_POST['deleteUser'])){
-                $delete = new Admin();
-                $delete->deleteUser($_POST['moddingUser']);
-            }
-
-        ?>
-
         <h2>AJOUT DE PRODUIT</h2>
         <form action="" method="post" enctype="multipart/form-data">
             <input type="text" name="nom" placeholder="Product Name...">
@@ -93,20 +93,54 @@ if (isset($_POST['delete_cat'])){
             <input type="submit" name="category" value="Envoyer">
         </form>
         
-
+    <h1>Ajout new user</h1>
         <form  id="createUser" action="" method="POST">
-            <label for="login">Login</label>
-            <input type="text" name="login">
+            <label for="createLogin">Login</label>
+            <input type="text" name="createLogin">
             <label for="email">Email</label>
-            <input type="email" name="email">
-            <label for="password" name="password">Mot de passe</label>
-            <input type="password" name="password">
+            <input type="email" name="eMail">
+            <label for="createPW" name="password">Mot de passe</label>
+            <input type="password" name="createPW">
             <label for="confirmPW">Confirmz vote mot de passe</label>
             <input type="password" name="confirmPW">
-            <input type="submit" name="register" value="go!">
+            <select name="droitsNewUser">
+                        <option>Select</option>
+                        <?php
+                        $droits = new Droits();
+                        $droits->displayChoice();
+                        ?>
+                    </select>
+            <input type="submit" name="createUser" value="Create">
         </form>
 
-        
+        <form action="" method="POST">
+            <h1>Modification de User</h1>
+                    <select name="moddingUser">
+                        <option>Select</option>
+                        <?php
+                        $article = new User();
+                        $article->getDisplay();
+                        ?>
+                    </select>
+                    <label for="UpdateLog">Changez le nv pseudo</label>
+                    <input type="text" name="UpdateLog">
+                    <label for="UpdateMail">E-Mail:</label>
+                    <input type="eMail" name="UpdateMail">
+                    <label for="updatePW">Nouveau mot de passe:</label>
+                    <input type="password" name="updatePW">
+                    <label for="updateCPW">Confirmez le mot de passe: </label>
+                    <input type="password" name="updateCPW">
+                    <label>Select Droits</label>
+                    <select name="droitUser">
+                        <option>Select</option>
+                        <?php
+                        $droits = new Droits();
+                        $droits->displayChoice();
+                        ?>
+                    </select>
+                    <input type="submit" name="mod" value="Envoyer">
+                    <input type="submit" name="deleteUser" value="Supprimer">
+        </form>        
     </main>
 </body>
 </html>
