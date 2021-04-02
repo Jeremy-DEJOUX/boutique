@@ -119,7 +119,7 @@ class User
 
 // ----------------------------------------- UPDATE ------------------------------------------------//
     function profile($login, $email, $password, $confirmPW)// intégrer e-mail
-    {; 
+    {
         $login =  htmlspecialchars(trim($login));
         $email = htmlspecialchars(trim($email));
         $password =  htmlspecialchars(trim($password));
@@ -136,17 +136,45 @@ class User
                 $update->bindValue(":myID", $_SESSION['user']['id'], PDO::PARAM_INT);
                 $update->bindValue(":mail",$email, PDO::PARAM_STR);
                 
-                $update->execute(); 
-            
-            } 
+                $update->execute();
+            }
             else  $error_log="Confirmation du mot de passe incorrect";
         }
         else $error_log = "veuillez remplir les champs";
      
-     if (isset ($error_log)) {
+        if (isset ($error_log)) {
         return $error_log;
+        }
     }
+//--------------------------------------Modding User------------------------------------------
 
+public function getUser(){
+    $i = 0;
+    $get = $this->db->prepare("SELECT * FROM user");
+    $get->execute();
+    while($fetch = $get->fetch(PDO::FETCH_ASSOC)){
+        $tableau[$i][] = $fetch['id'];
+        $tableau[$i][] = $fetch['login'];
+        $i++;
     }
+    return $tableau;
+}
+
+public function getDisplay(){
+    $display = new User();
+    $tableau = $display->getUser();
+    foreach($tableau as $value){
+        echo '<option values"' .$value[0] . '">' . $value[1] . '</option>';
+    }
+}
+
+public function updateDroit($login, $id_droits){
+    $update = $this->db->prepare("UPDATE user SET id_droits = :id_droits WHERE id = :login");
+    $update->bindValue(":login", $login, PDO::PARAM_STR);
+    $update->bindValue(":id_droits", $id_droits, PDO::PARAM_INT);
+    $update->execute();
+
+}
+
 }
 ?>
