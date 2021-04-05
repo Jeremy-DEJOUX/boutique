@@ -4,16 +4,19 @@ require_once('../class/classPanier.php');
 require_once('../function/db.php');
 $db = new Db;
 $panier = new Panier($db);
-var_dump($_SESSION['result']);
+var_dump($_SESSION);
 
 
 ?>
 
 <?php
 $tab = [];
-foreach ($_SESSION['result'] as $row){
+if (isset($_SESSION['result'])) {
+    foreach ($_SESSION['result'] as $row){
         array_push($tab, $row['nom']);
+    }
 }
+
 // echo $tab[1], $tab[0];
 if (isset($_POST['confirmCommande'])) {
     $commande = $panier->commande(1, $tab);
@@ -32,17 +35,19 @@ if (isset($_POST['confirmCommande'])) {
             }
             foreach($products as $product):
         ?>
+        <form method="post">
+            <p>Nom <?= $product->nom; ?> <br/></p>
+            <p>Prix <?= number_format($product->prix, 2); ?></p> <br/>
+            <img src="../ressources/img/<?= $product->FullNameImg; ?>" alt=""> <br>
+            <span>Quantité <input type="text" name="panier[quantity][<?= $product->id; ?>]" value="<?= $_SESSION['panier'][$product->id]; ?>"></span>
 
-        <p>Nom <?= $product->nom; ?> <br/></p>
-        <p>Prix <?= number_format($product->prix, 2); ?></p> <br/>
-        <img src="../ressources/img/<?= $product->FullNameImg; ?>" alt=""> <br>
-        <p>Quantité <?= $_SESSION['panier'][$product->id]; ?></p>
 
+            
 
-        
-
-        <a href="panier.php?delPanier=<?= $product->id;?>">Suprimmer</a>
-        <?php endforeach; ?>
+            <a href="panier.php?delPanier=<?= $product->id;?>">Suprimmer</a>
+            <?php endforeach; ?>
+            <input type="submit" value="Recalculer">
+        </form>
 
         <p>Somme des produits <?= $panier->count(); ?> </p>
 
