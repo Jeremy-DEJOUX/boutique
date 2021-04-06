@@ -92,14 +92,14 @@ class Product {
                         $stmt->bindValue(':nom', $nom, PDO::PARAM_STR);
                         $stmt->execute();
                         $result_prod = $stmt->fetch(PDO::FETCH_ASSOC);
-                        var_dump($result_prod);
+                        // var_dump($result_prod);
 
                         $sql = "SELECT * FROM categories WHERE id = :nom";
                         $stmt = $this->db->prepare($sql);
                         $stmt->bindValue(':nom', $nom_cat, PDO::PARAM_INT);
                         $stmt->execute();
                         $result_cat = $stmt->fetch(PDO::FETCH_ASSOC);
-                        var_dump($result_cat);
+                        // var_dump($result_cat);
 
 
                         $sql = "INSERT INTO prod_cat (id_produits, id_categorie) VALUES (:id_produits, :id_categorie)";
@@ -141,7 +141,7 @@ class Product {
         $categories->execute();
         $result = $categories->fetchAll();
         $_SESSION['categorie'] = $result;
-        var_dump($result); //{DEBUG}
+        // var_dump($result); //{DEBUG}
     }
 //----------------------------------------Barre de recherche 
     public function searchBar(){
@@ -153,7 +153,7 @@ class Product {
             $stmt=$this->db->prepare($sql);
             $stmt->execute();
             $queryResult = $stmt->fetchAll();
-            var_dump($queryResult);
+            // var_dump($queryResult);
     
             if(COUNT($queryResult) > 0){
                 foreach ($queryResult as $key) {
@@ -175,7 +175,7 @@ class Product {
         $article->bindValue(':id', $id, PDO::PARAM_INT);
         $article->execute();
         $result = $article->fetchAll(PDO::FETCH_OBJ);
-        var_dump($result);
+        // var_dump($result);
         $_SESSION['produit'] = $result;
     }
 
@@ -227,7 +227,7 @@ class Product {
                         $query->execute();
 
                         $result = $query->fetchAll(PDO::FETCH_ASSOC);
-                        var_dump($result);
+                        // var_dump($result);
 
                         $sql = "UPDATE produits SET nom = :nom, description = :description, prix = :prix, stock = :stock, titleImg = :titleImg, FullNameImg = :FullNameImg, orderImg = :order WHERE id = :id";
                         $update = $this->db->prepare($sql);

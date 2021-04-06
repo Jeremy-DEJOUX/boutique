@@ -9,7 +9,7 @@ require_once('../class/classDroits.php');
 //-----------------------chemin-----------------
 
 
-require_once('header.php');
+// require_once('header.php');
 if(!isset($_SESSION['id_droits']) OR $_SESSION['id_droits'] != 1337){
    echo "Only admin can accest this page"; 
 }
