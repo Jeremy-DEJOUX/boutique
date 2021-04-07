@@ -34,13 +34,13 @@ $produits = new Product;
                     $produits->affichageProduits();
                     for ($i=0; $i < count($_SESSION['result']); $i++) { 
                         echo 
-                            "<a href='produits.php?id=$i'>
+                            "<a href='produit.php?id=$i'>
                                 <img src='../ressources/img/" . $_SESSION['result'][$i]['FullNameImg'] . "'>
                             </a>";
                     }
                 }
 
-            ?>
+?>
     <div>
         <?php $products = $db->query("SELECT * FROM produits"); ?>
         <?php foreach ($products as $product): ?>
