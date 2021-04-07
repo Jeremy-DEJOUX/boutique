@@ -37,7 +37,7 @@ class Comment{
 //---------------------------------------------display commentaire--------------------------
 
     public function displayComment($id){
-        $comment = $this->db->prepare("SELECT c.commentaire, c.date, c.id_user, c.id_produit, p.id, u.login FROM commentaires c INNER JOIN produits p ON c.id_produit = p.id INNER JOIN user u ON c.id_user = u.id WHERE p.id = :id");    
+        $comment = $this->db->prepare("SELECT c.commentaire, c.date, c.id_user, c.id_produit, p.id, u.login FROM commentaires c INNER JOIN produits p ON c.id_produit = p.id INNER JOIN user u ON c.id_user = u.id WHERE p.id = :id ORDER BY c.date DESC LIMIT 5 ");    
         $comment->bindValue(':id', $id, PDO::PARAM_INT);
         $comment->execute();
         $result = $comment->fetchAll();
