@@ -13,6 +13,7 @@ $path_panier="pages/panier.php";
 $path_produits="pages/newproduct.php";
 $path_admin="pages/admin.php";
 $path_footer='../css/footer.css';
+$path_deconnexion='pages'
 
 ?>
 
@@ -34,7 +35,7 @@ $path_footer='../css/footer.css';
         <article class="box-slide">
             <h1 id="titre-prod">Nos Derniers produits</h1>
             <section class="slide-show">
-            <?php $products = $db->query("SELECT * FROM produits"); ?>
+            <?php $products = $db->query("SELECT * FROM produits ORDER BY id DESC LIMIT 3 "); ?>
             <?php foreach ($products as $product): ?>
                 
                     <a class="a-slide" href="pages/produit.php?id=<?= $product->id; ?>"><img class='img-slide'src="ressources/img/<?=$product->FullNameImg ?>" alt="Img Produits"></a>
