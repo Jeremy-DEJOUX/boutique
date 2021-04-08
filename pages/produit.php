@@ -19,7 +19,9 @@ $panier = new Panier($db);
 
     <?php
 
-        $login = $_SESSION['user'];
+        if(isset($_SESSION['user'])){
+            $login = $_SESSION['user'];
+        }
         if(isset($_POST["postComment"])){
             $comment = new Comment;
             $comment->postComment($login, $_POST['comment'], $_GET['id']);
@@ -78,11 +80,13 @@ $panier = new Panier($db);
 
                     <div id="container_bot">
 
-                        <form id="formCom" action="" method='POST'>
-                            <label for="">Ajouter un commentaire</label><br>
-                            <textarea name="comment" id="" cols="30" rows="2"></textarea><br>
-                            <input type="submit" name="postComment" value="Envoyer">
-                        </form>
+                        <?php if (isset($_SESSION['user'])): ?>
+                            <form id="formCom" action="" method='POST'>
+                                <label for="">Ajouter un commentaire</label><br>
+                                <textarea name="comment" id="" cols="30" rows="2"></textarea><br>
+                                <input type="submit" name="postComment" value="Envoyer">
+                            </form>
+                        <?php endif; ?>
 
                         <a id="add_cart" class="addPanier" href="addpanier.php?id=<?= $_GET['id'] ?>">ADD TO CART</a>
                     </div>
