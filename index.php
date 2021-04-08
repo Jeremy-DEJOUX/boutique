@@ -10,8 +10,8 @@ $produits = new Product;
 $path_index="";
 $path_connexion="pages/insCo.php";
 $path_panier="pages/panier.php";
-$path_produits="pages/produits.php";
-$path_admin="pages/reservation.php";
+$path_produits="pages/newproduct.php";
+$path_admin="pages/admin.php";
 $path_footer='../css/footer.css';
 
 ?>

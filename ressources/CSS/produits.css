@@ -1,0 +1,115 @@
+@import url(https://fonts.googleapis.com/css?family=Rhodium+Libre:regular);
+@import url(https://fonts.googleapis.com/css?family=Dancing+Script:regular,500,600,700);
+@import url(https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,regular,italic,500,500italic,700,700italic,900,900italic);
+@import url(https://fonts.googleapis.com/css?family=Montserrat:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic);
+
+body{
+    display: flex;
+    width: auto;
+    background-color: #495464;
+    justify-content: space-evenly;
+}
+main{
+    width: 95%;
+    min-height: 95vh;
+    background-color: white;
+    margin-top: 2%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+#h1Main{
+    font-family : 'Rhodium Libre';
+}
+#divMainProd{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; 
+}
+.divProd{
+    display: flex;
+    flex-wrap: wrap;
+    height: 400px;
+    width: 300px;
+    border: solid #495464 4px;
+}
+
+.imgProd{
+    height: 300px;
+    width: 300px;
+}
+#h1Main{
+    width: 100%;
+    text-align: -webkit-center;
+}
+#artForm{
+    font-family : 'Rhodium Libre';
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+
+}
+.artProd{
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 5%;
+    background-color: #495464;    
+}
+.imgProd{
+    border-top: solid #495464 4px;
+    border-bottom: solid #495464 4px;
+    background-color: #495464;
+}
+.divTitre{
+    font-family : 'Rhodium Libre';
+    background-color: #495464;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    color: white;
+}
+.divPrix{
+    font-family : 'Rhodium Libre';
+    background-color: #495464;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    color: white;
+}
+.divLink{
+    font-family : 'Rhodium Libre';
+    text-decoration: none;
+    background-color: #495464;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: inherit;
+}
+.myButton {
+	box-shadow: 0px 1px 0px 0px #9fb4f2;
+	background:linear-gradient(to bottom, #39465c 5%, #476e9e 100%);
+	background-color:#39465c;
+	border-radius:15px;
+	border:2px solid #4e6096;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:14px;
+	font-weight:bold;
+	padding:12px 16px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #283966;
+    font-family : 'Rhodium Libre';
+}
+.myButton:hover {
+	background:linear-gradient(to bottom, #476e9e 5%, #39465c 100%);
+	background-color:#476e9e;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+
+        
