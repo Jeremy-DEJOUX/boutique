@@ -273,4 +273,15 @@ class Product {
             echo '<option value="'.$value[0].'">'.$value[1] .'</option>';
         }
     }
+//-------------------------------------------------------------------------------------------
+    public function getDisplayProd(){
+        $display = new Product();
+        $tableau = $display->affichageProduits();
+        for ($i=0; $i < count($_SESSION['result']); $i++) { 
+            echo 
+                "<a href='pages/produit.php?id=$i' class='a-slide'>
+                    <img class='img-slide' src='ressources/img/" . $_SESSION['result'][$i]['FullNameImg'] . "'>
+                </a>";
+        }
+    }
 }
