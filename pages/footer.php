@@ -3,14 +3,13 @@
         <ul class="flex j_around">
             <li><a class="headerlink" href="<?= $path_index ?>">HOME</a></li>
             <?php if(empty($_SESSION['user'])){?>
-                <li><a class="headerlink" href="<?= $path_inscription ?>">SIGN IN</a></li>
-                <li><a class="headerlink" href="<?= $path_conexion ?>">LOGIN</a></li>
-                <li><a class="headerlink" href="<?= $path_shop ?>">SHOP</a></li>
+                <li><a class="headerlink" href="<?= $path_connexion ?>">LOGIN/SIGN IN</a></li>
+                <li><a class="headerlink" href="<?= $path_produits ?>">SHOP</a></li>
+                <li><a class="headerlink" href="<?= $path_panier ?>">PANIER</a></li>
                 <?php }?>
             <?php if(isset($_SESSION['user'])){
                 echo
                 "
-                <a class='headerlink' href='$path_profil'>PROFIL</a>
                 <a class='headerlink' href='$path_deconnexion'>DECONNEXION</a>
                 ";  
             }
