@@ -114,11 +114,3 @@ if (isset($_POST['confirmCommande'])) {
 </html>
 
 
-<<<<<<< HEAD
-=======
-</main>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script type="text/javascript" src="../ressources/JS/script.js"></script>
-</body>
-</html>
->>>>>>> thomas
