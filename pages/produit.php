@@ -40,6 +40,7 @@ $panier = new Panier($db);
             <nav id="navigation">
                 <a href="produits.php">Produits</a>
                 <a href="profil.php">Compte</a>
+                <a href="panier.php">Panier</a>
             </nav>
             <div id="box">
 
