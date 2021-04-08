@@ -18,7 +18,7 @@ class User
     public function ConnectUser($login, $password)
     {
 // On prépare la requête, on l'execute puis on fait un fetch pour récupérer les infos
-        $ConnectUser = $this->db->prepare("SELECT * FROM user WHERE login = :login");
+        $ConnectUser = $this->db->prepare("SELECT user.login, user.password, user.email, user.id, user.id_droits, droits.nom FROM user INNER JOIN droits ON user.id_droits = droits.id WHERE user.login = :login ");
         $ConnectUser->bindValue(':login', $login, PDO::PARAM_STR);
         $ConnectUser->execute();
         $user = $ConnectUser->fetch(PDO::FETCH_ASSOC);
@@ -30,6 +30,8 @@ class User
                 $this->id = $user['id'];
                 $this->login = $user['login'];
                 $this->password = $user['password'];
+                $this->email = $user['email'];
+                $this->id_droits = $user['nom'];
                 $_SESSION['id_droits'] = $user['id_droits'];
                 $_SESSION['user'] = $user;
                 $_SESSION['id'] = $user['id'];
@@ -40,9 +42,13 @@ class User
                     'login' =>
                         $this->login,
                     'password' =>
-                        $this->password
+                        $this->password,
+                    'email' =>
+                        $this->email,
+                    'id_droits' =>
+                        $this->id_droits,
                 ];
-                header('location:../index.php');
+                header('location:../pages/profil.php');
 
             }
             else {
@@ -118,7 +124,7 @@ class User
     }
 
 // ----------------------------------------- UPDATE ------------------------------------------------//
-    function profile($login, $email, $password, $confirmPW)// intégrer e-mail
+    public function profile($login, $email, $password, $confirmPW)// intégrer e-mail
     {
         $login =  htmlspecialchars(trim($login));
         $email = htmlspecialchars(trim($email));
@@ -136,7 +142,37 @@ class User
                 $update->bindValue(":myID", $_SESSION['user']['id'], PDO::PARAM_INT);
                 $update->bindValue(":mail",$email, PDO::PARAM_STR);
                 
-                $update->execute();
+                $result = $update->execute();
+
+                if ($result) {
+                    $ConnectUser = $this->db->prepare("SELECT user.login, user.password, user.email, user.id, user.id_droits, droits.nom FROM user INNER JOIN droits ON user.id_droits = droits.id");
+                    $ConnectUser->execute();
+                    $user = $ConnectUser->fetch(PDO::FETCH_ASSOC);
+
+                    $this->id = $user['id'];
+                    $this->login = $user['login'];
+                    $this->password = $user['password'];
+                    $this->email = $user['email'];
+                    $this->id_droits = $user['nom'];
+                    $_SESSION['id_droits'] = $user['id_droits'];
+                    $_SESSION['user'] = $user;
+                    $_SESSION['id'] = $user['id'];
+// on regroupe le resultat du fetch dans un tableau de session
+                    $_SESSION['user'] = [
+                        'id' =>
+                            $this->id,
+                        'login' =>
+                            $this->login,
+                        'password' =>
+                            $this->password,
+                        'email' =>
+                            $this->email,
+                        'id_droits' =>
+                            $this->id_droits,
+                    ];
+
+                    header('location:../pages/profil.php'); 
+                }
             }
             else  $error_log="Confirmation du mot de passe incorrect";
         }

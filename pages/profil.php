@@ -32,30 +32,47 @@ if (isset($_POST["register"])){
     <?php if (isset($_SESSION["user"])): ?>
 
         <main>
-            <a href="deconnexion.php">Deconnexion</a>
-            <form action="profil.php" method="POST" id="formulaire_edition" class="flex a_center column j_around">
 
-            <section class="flex column a_center j_center">
-                <label for="newLogin">Nouveau pseudo</label>
-                <input class="form_input" type="text"  name="newlogin" placeholder="Login">
-            </section>
+            <h1>Profil</h1>
 
-            <section class="flex column a_center">
-                <label for="newmail">Nouvelle adresse mail</label>
-                <input type="email" name="newMail">
-            </section>
+            <div class="First_box">
 
-            <section class="flex j_around a_center">
-                <article class="flex column j_center a_center">
-                    <label for="oldPassword">New password</label>
-                    <input class="form_input" type="password" name="newpassword" placeholder="New password">
-                </article>
-                <article class="flex column j_center a_center">
-                    <label for="newPassword">Confirm password</label>
-                    <input class="form_input" type="password" name="confpassword" placeholder="Confirm Password">
-                </article>
-            </section>
-            <input type="submit" name="submit" value="Envoyer">Mettre à jour mon profil</input>
+                <div id="My_profil">
+                    <h2>Votre Profil</h2>
+
+                    <p> Login: <?= $_SESSION['user']['login']; ?> </p>
+                    <p> Email: <?= $_SESSION['user']['email']; ?> </p>
+                    <p> Droits: <?= $_SESSION['user']['id_droits']; ?> </p>
+                </div>
+
+
+                    
+                <div id="Form_modif">
+                    <h2>Modification</h2>
+
+                    <form action="profil.php" method="POST" id="modif">
+
+                        <label for="newLogin">Nouveau pseudo</label>
+                        <input type="text"  name="newlogin" placeholder="Login"> <br>
+
+                        <label for="newmail">Nouvelle adresse mail</label>
+                        <input type="email" name="newMail"> <br>
+                
+                        <label for="oldPassword">New password</label>
+                        <input type="password" name="newpassword" placeholder="New password"> <br>
+                
+                        <label for="newPassword">Confirm password</label>
+                        <input type="password" name="confpassword" placeholder="Confirm Password"> <br>
+          
+                        <button type="submit" name="submit" value="Envoyer">Mettre à jour</button>
+                    </form>
+
+                </div>
+
+                
+            </div>
+            
+            
 
             <?php 
                 if (isset($_POST['submit'])){
@@ -63,6 +80,8 @@ if (isset($_POST["register"])){
                     $user->profile($_POST['newlogin'],$_POST['newMail'],$_POST['newpassword'],$_POST['confpassword']);
                 }
             ?> 
+
+            <a href="deconnexion.php">Deconnexion</a>
         </main>
     
 
