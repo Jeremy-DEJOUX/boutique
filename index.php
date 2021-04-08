@@ -8,12 +8,12 @@ $db = new Db;
 $produits = new Product;
 
 $path_index="";
-$path_connexion="pages/insCo.php";
+$path_connexion="pages/profil.php";
 $path_panier="pages/panier.php";
 $path_produits="pages/newproduct.php";
 $path_admin="pages/admin.php";
 $path_footer='../css/footer.css';
-$path_deconnexion='pages'
+$path_deconnexion='pages/deconnexion.php'
 
 ?>
 

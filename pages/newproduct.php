@@ -10,6 +10,14 @@ $db = new Db;
 $panier = new Panier($db);
 $produits = new Product;
 
+$path_index="";
+$path_connexion="profil.php";
+$path_panier="panier.php";
+$path_produits="newproduct.php";
+$path_admin="admin.php";
+$path_footer='../ressources/css/footer.css';
+$path_header='../ressources/css/header.css';
+$path_deconnexion='pages/deconnexion.php'
 ?>
 
 <!DOCTYPE html>
@@ -25,6 +33,7 @@ $produits = new Product;
 </head>
 <body>
 <main>
+    <?php require_once('header.php'); ?>
     <h1 id='h1Main'>PRODUITS</h1>
 <article id='artForm'>
     <section class='secForm'>
@@ -56,7 +65,7 @@ $produits = new Product;
 
             if(isset($_POST['submit-search'])){
                 $search = $_POST['search'];
-                $sql = "SELECT * FROM produits WHERE nom LIKE '%$search%";
+                $sql = "SELECT * FROM produits WHERE nom LIKE '%$search%'";
                 $stmt=connect()->prepare($sql);
                 $stmt->execute();
                 $queryResult = $stmt->fetchAll();
@@ -101,6 +110,7 @@ $produits = new Product;
         </article>
         <?php endforeach; ?>
     </div>
+    <?php require_once('footer.php');?>
 </main>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript" src="../ressources/JS/script.js"></script>
