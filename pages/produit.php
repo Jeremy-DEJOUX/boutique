@@ -18,7 +18,7 @@ $panier = new Panier($db);
 <body>
 
     <?php
-
+    
         $login = $_SESSION['user'];
         if(isset($_POST["postComment"])){
             $comment = new Comment;
