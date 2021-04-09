@@ -91,7 +91,28 @@ if (isset($_POST['confirmCommande'])) {
         </div>
     </div>
 
-            
+            <form action="#">
+                <label for="Adresse">Adresse de Livraison :</label>
+                <input type="text">
+
+                <label for="Code">Code Postal :</label>
+                <input type="text">
+
+                <label for="Ville">Ville :</label>
+                <input type="text">
+
+                <label for="Pays">Pays :</label>
+                <input type="text">
+
+                <label for="Carte">Carte Bleu :</label>
+                <input type="text">
+
+                <label for="CVV">CVV :</label>
+                <input type="text">
+
+                <label for="Nom_Prenom">Nom Prenom du titulaires :</label>
+                <input type="text">
+            </form>
             <form action="" method="post">
                 <button name="confirmCommande">Confirmez la Commande</button>
             </form>
@@ -114,8 +135,3 @@ if (isset($_POST['confirmCommande'])) {
 </html>
 
 
-</main>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script type="text/javascript" src="../ressources/JS/script.js"></script>
-</body>
-</html>

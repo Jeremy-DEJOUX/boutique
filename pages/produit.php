@@ -18,8 +18,10 @@ $panier = new Panier($db);
 <body>
 
     <?php
-    
-        $login = $_SESSION['user'];
+
+        if(isset($_SESSION['user'])){
+            $login = $_SESSION['user'];
+        }
         if(isset($_POST["postComment"])){
             $comment = new Comment;
             $comment->postComment($login, $_POST['comment'], $_GET['id']);
@@ -40,6 +42,7 @@ $panier = new Panier($db);
             <nav id="navigation">
                 <a href="produits.php">Produits</a>
                 <a href="profil.php">Compte</a>
+                <a href="panier.php">Panier</a>
             </nav>
             <div id="box">
 
@@ -77,13 +80,19 @@ $panier = new Panier($db);
 
                     <div id="container_bot">
 
-                        <form id="formCom" action="" method='POST'>
-                            <label for="">Ajouter un commentaire</label><br>
-                            <textarea name="comment" id="" cols="30" rows="2"></textarea><br>
-                            <input type="submit" name="postComment" value="Envoyer">
-                        </form>
+                        <?php if (isset($_SESSION['user'])): ?>
+                            <form id="formCom" action="" method='POST'>
+                                <label for="">Ajouter un commentaire</label><br>
+                                <textarea name="comment" id="" cols="30" rows="2"></textarea><br>
+                                <input type="submit" name="postComment" value="Envoyer">
+                            </form>
+                            <a id="add_cart" class="addPanier" href="addpanier.php?id=<?= $_GET['id'] ?>">ADD TO CART</a>
 
-                        <a id="add_cart" class="addPanier" href="addpanier.php?id=<?= $_GET['id'] ?>">ADD TO CART</a>
+                            <?php else: ?>
+                                <p>Pour ajouter se produits a votre panier veuillez vous <a href="profil.php"> connecter </a></p>
+                        <?php endif; ?>
+
+                        
                     </div>
 
                 </section>
