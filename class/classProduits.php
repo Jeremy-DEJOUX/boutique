@@ -136,12 +136,21 @@ class Product {
 
 
     public function produitsByCategory($categorie){
-        $categories = $this->db->prepare("SELECT * FROM prod_cat INNER JOIN produits p ON id_produits = p.id WHERE id_categorie = :id_categorie");
-        $categories->bindValue(':id_categorie', $categorie, PDO::PARAM_INT);
-        $categories->execute();
-        $result = $categories->fetchAll();
-        $_SESSION['categorie'] = $result;
-        // var_dump($result); //{DEBUG}
+        if ($categorie == null){
+            $sql = "SELECT * FROM produits ORDER BY orderImg DESC";
+            $stmt = $this->db->query($sql);
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $_SESSION['categorie'] = $result;
+        }
+        else
+        {
+            $categories = $this->db->prepare("SELECT * FROM prod_cat INNER JOIN produits p ON id_produits = p.id WHERE id_categorie = :id_categorie");
+            $categories->bindValue(':id_categorie', $categorie, PDO::PARAM_INT);
+            $categories->execute();
+            $result = $categories->fetchAll();
+            $_SESSION['categorie'] = $result;
+            // var_dump($result); //{DEBUG}
+        }
     }
 //----------------------------------------Barre de recherche 
     public function searchBar(){
