@@ -35,6 +35,12 @@ if (isset($_POST["register"])){
 
             <h1>Profil</h1>
 
+            <nav>
+                <a href="../index.php">Acceuil</a>
+                <a href="produits.php">Produits</a>
+                <a href="panier.php">Panier</a>
+            </nav>
+
             <div class="First_box">
 
                 <div id="My_profil">
@@ -94,6 +100,7 @@ if (isset($_POST["register"])){
 <!-- ================================================================= CONNEXION / INSCRIPTION ============================================================ -->
     <?php else: ?>
         <main>
+            <h2>Connexion</h2>
             <form id="form_connect" action="" method="POST">
                 <label for="login">Login</label>
                 <input type="text" name="login">
@@ -101,6 +108,8 @@ if (isset($_POST["register"])){
                 <input type="password" name="password">
                 <input type="submit" name="connect" value="go!">
             </form>
+
+            <h2>Inscription</h2>
 
             <form  id="form_register" action="" method="POST">
                 <label for="login">Login</label>

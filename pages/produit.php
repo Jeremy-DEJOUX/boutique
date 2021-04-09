@@ -86,9 +86,13 @@ $panier = new Panier($db);
                                 <textarea name="comment" id="" cols="30" rows="2"></textarea><br>
                                 <input type="submit" name="postComment" value="Envoyer">
                             </form>
+                            <a id="add_cart" class="addPanier" href="addpanier.php?id=<?= $_GET['id'] ?>">ADD TO CART</a>
+
+                            <?php else: ?>
+                                <p>Pour ajouter se produits a votre panier veuillez vous <a href="profil.php"> connecter </a></p>
                         <?php endif; ?>
 
-                        <a id="add_cart" class="addPanier" href="addpanier.php?id=<?= $_GET['id'] ?>">ADD TO CART</a>
+                        
                     </div>
 
                 </section>
