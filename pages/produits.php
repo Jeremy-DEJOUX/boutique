@@ -10,6 +10,14 @@ $db = new Db;
 $panier = new Panier($db);
 $produits = new Product;
 
+$path_index="../index.php";
+$path_connexion="profil.php";
+$path_panier="panier.php";
+$path_produits="newproduct.php";
+$path_admin="admin.php";
+$path_footer='../ressources/css/footer.css';
+$path_header='../ressources/css/header.css';
+$path_deconnexion='deconnexion.php'
 ?>
 
 <!DOCTYPE html>

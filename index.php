@@ -8,12 +8,12 @@ $db = new Db;
 $produits = new Product;
 
 $path_index="";
-$path_connexion="pages/insCo.php";
+$path_connexion="pages/profil.php";
 $path_panier="pages/panier.php";
 $path_produits="pages/newproduct.php";
 $path_admin="pages/admin.php";
 $path_footer='../css/footer.css';
-$path_deconnexion='pages'
+$path_deconnexion='pages/deconnexion.php'
 
 ?>
 
@@ -30,6 +30,7 @@ $path_deconnexion='pages'
 </head>
 <body>
     <?php require_once('pages/header.php'); ?>
+    <img id='logo' src='ressources/img/logo.png' alt='Logo Site'>
         <main>
 
         <article class="box-slide">
