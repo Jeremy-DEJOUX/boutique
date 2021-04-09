@@ -91,30 +91,38 @@ if (isset($_POST['confirmCommande'])) {
         </div>
     </div>
 
-            <form action="#">
-                <label for="Adresse">Adresse de Livraison :</label>
-                <input type="text">
+            <form action="#" id="payment">
 
-                <label for="Code">Code Postal :</label>
-                <input type="text">
+                <section id="Adresse_user">
+                    <label for="Adresse">Adresse de Livraison :</label>
+                    <input type="text"> <br>
 
-                <label for="Ville">Ville :</label>
-                <input type="text">
+                    <label for="Code">Code Postal :</label>
+                    <input type="text"> <br>
 
-                <label for="Pays">Pays :</label>
-                <input type="text">
+                    <label for="Ville">Ville :</label>
+                    <input type="text"> <br>
 
-                <label for="Carte">Carte Bleu :</label>
-                <input type="text">
+                    <label for="Pays">Pays :</label>
+                    <input type="text"> <br>
+                </section>
 
-                <label for="CVV">CVV :</label>
-                <input type="text">
+                <section id="payment_user">
+                    <label for="Carte">Carte Bleu :</label>
+                    <input type="text"> <br>
 
-                <label for="Nom_Prenom">Nom Prenom du titulaires :</label>
-                <input type="text">
+                    <label for="CVV">CVV :</label>
+                    <input type="text"> <br>
+
+                    <label for="Nom_Prenom">Nom Prenom :</label>
+                    <input type="text"> <br>
+                </section>
+                
+
+                
             </form>
             <form action="" method="post">
-                <button name="confirmCommande">Confirmez la Commande</button>
+                <button name="confirmCommande" id="confirm">Confirmez la Commande</button>
             </form>
 
 
