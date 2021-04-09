@@ -30,6 +30,7 @@ $path_deconnexion='pages/deconnexion.php'
 </head>
 <body>
     <?php require_once('pages/header.php'); ?>
+    <img id='logo' src='ressources/img/logo.png' alt='Logo Site'>
         <main>
 
         <article class="box-slide">
