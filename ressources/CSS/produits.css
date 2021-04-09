@@ -4,115 +4,110 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic);
 
 body{
-    display: flex;
-    width: auto;
+    margin: 0;
+    padding: 0;
+    width: 100%;
     background-color: #495464;
-    justify-content: space-evenly;
-}
-main{
-    width: 95%;
-    min-height: 100vh;
-    background-color: white;
-    margin-top: 2%;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    margin-bottom: 10%;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
 }
 
-#h1Main{
-    font-family : 'Rhodium Libre';
-}
-#divMainProd{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between; 
-    margin-bottom: inherit;
-}
-.divProd{
-    display: flex;
-    flex-wrap: wrap;
-    height: 400px;
-    width: 300px;
-    border: solid #495464 4px;
-}
+@media (min-width: 800px) {
 
-.imgProd{
-    height: 300px;
-    width: 300px;
-}
-#h1Main{
-    width: 100%;
-    text-align: -webkit-center;
-}
-#artForm{
-    font-family : 'Rhodium Libre';
-    width: 100%;
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-evenly;
+    main{
+        margin: 0;
+        padding: 0;
+        width: 90%;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        font-family: 'Rhodium Libre';
+    }
 
-}
-.artProd{
-    margin-left: 5%;
-    margin-right: 5%;
-    margin-top: 5%;
-    background-color: #495464;    
-}
-.imgProd{
-    border-top: solid #495464 4px;
-    border-bottom: solid #495464 4px;
-    background-color: #495464;
-}
-.divTitre{
-    font-family : 'Rhodium Libre';
-    background-color: #495464;
-    width: 100%;
-    display: flex;
-    justify-content: space-evenly;
-    color: white;
-}
-.divPrix{
-    font-family : 'Rhodium Libre';
-    background-color: #495464;
-    width: 100%;
-    display: flex;
-    justify-content: space-evenly;
-    color: white;
-}
-.divLink{
-    font-family : 'Rhodium Libre';
-    text-decoration: none;
-    background-color: #495464;
-    width: 100%;
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: inherit;
-}
-.myButton {
-	box-shadow: 0px 1px 0px 0px #9fb4f2;
-	background:linear-gradient(to bottom, #39465c 5%, #476e9e 100%);
-	background-color:#39465c;
-	border-radius:15px;
-	border:2px solid #4e6096;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Arial;
-	font-size:14px;
-	font-weight:bold;
-	padding:12px 16px;
-	text-decoration:none;
-	text-shadow:0px 1px 0px #283966;
-    font-family : 'Rhodium Libre';
-}
-.myButton:hover {
-	background:linear-gradient(to bottom, #476e9e 5%, #39465c 100%);
-	background-color:#476e9e;
-}
-.myButton:active {
-	position:relative;
-	top:1px;
+    #Container{
+        margin-top: 5vh;
+        padding: 0;
+        min-height: 90vh;
+        width: 100%;
+        background-color: #F4F4F2;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+        #navigation{
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+            #navigation a{
+                text-decoration: none;
+                color: #495464;
+                font-size: 2em;
+                font-family: 'Montserrat';
+                font-weight: 500;
+                padding: 10px;
+            }
+            #navigation a:hover{
+                transition: 0.3s;
+                color: #adb7d1;
+                font-weight: 600;
+            }
+
+        
+        #Filtrage{
+            margin: 0px;
+            padding: 0px;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+
+        }
+
+
+        .Container_Produits{
+            width: 80%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: space-around;
+        }
+
+            .box_product{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                min-width: 20vw; 
+                height: 20vh;
+                margin: 0px;
+                padding-right: 5vh;
+                padding-bottom: 5vh;
+            }
+
+                .lien_product{
+                    height: 100%;
+                    margin: 0px;
+                    padding: 0;
+                }
+
+                    .img_product{
+                        height: 100%;
+                        margin: 0px;
+                        padding: 0;
+                    }
+    
+    
 }
 
         
