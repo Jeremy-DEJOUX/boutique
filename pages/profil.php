@@ -88,8 +88,30 @@ if (isset($_POST["register"])){
             ?> 
 
             <a href="deconnexion.php">Deconnexion</a>
+
+
+            <div id="commandes">
+                <h2>Vos commandes</h2>
+
+                <?php 
+                    $user = new User;
+                    $user->commandes($_SESSION['id']);
+                    foreach($_SESSION['commandes'] as $row):
+                ?>
+
+                <div class="my_commandes">
+                    <p> Nom du produits: <?= $row['nom']; ?> </p>
+                    <img src="../ressources/img/<?= $row['FullNameImg']; ?>" alt="">
+                    <p>Date de la commande : <?= $row['date']; ?></p>
+                </div>
+            
+
+                <?php endforeach; ?>
+                
+            </div>
         </main>
-    
+
+        
 
 
 
@@ -124,6 +146,8 @@ if (isset($_POST["register"])){
             </form>
         </main>
     <?php endif; ?>
+
+    
 
 
 

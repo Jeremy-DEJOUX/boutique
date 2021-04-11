@@ -37,12 +37,7 @@ if (isset($_POST['delete_cat'])){
     $category->deleteCat($_POST['deleteCat']);
 }
 //-----------------------------------------USER---------------------------------------------
-if(isset($_POST['mod'])){
-                $droits = new User();
-                $droits->updateDroit($_POST['moddingUser'], $_POST['droitUser']);
-                $update = new Admin();
-                $update->UpdateNewUser($_POST['moddingUser'], $_POST['UpdateLog'], $_POST['UpdateMail'], $_POST['updatePW'], $_POST['updateCPW']);
-            }
+
 if(isset($_POST['createUser'])){
     $create = new Admin;
     $create->registerNewUser($_POST['createLogin'], $_POST['eMail'], $_POST['createPW'], $_POST['confirmPW'], $_POST['droitsNewUser']);
@@ -70,6 +65,7 @@ if(isset($_POST['deleteUser'])){
             <a href="admin.php?id=categorie">Cagtegorie</a>
             <a href="admin.php?id=produits">Produits</a>
             <a href="admin.php?id=user">Utilisateurs</a>
+            <a href="admin.php?id=commandes">Commandes</a>
         </nav>
         
 
@@ -97,7 +93,7 @@ if(isset($_POST['deleteUser'])){
 
                         <form action="" method="post">
                             <select name="deleteCat">
-                                <option>Select</option>
+                                <option selected disabled hidden>Select</option>
                                     <?php
                                         $cat = new Categorie();
                                         $cat->displayChoice();
@@ -128,7 +124,7 @@ if(isset($_POST['deleteUser'])){
 
                                 <label>Select Categorie</label>
                                     <select name="nom_cat">
-                                        <option>Select</option>
+                                        <option  selected disabled hidden>Select</option>
                                             <?php
                                                 $cat = new Categorie();
                                                 $cat->displayChoice();
@@ -155,7 +151,7 @@ if(isset($_POST['deleteUser'])){
                         <div class="product">
                             <label>Produits</label>
                             <select name="id_prod">
-                                <option>Select</option>
+                                <option selected disabled hidden>Select</option>
                                     <?php
                                         $cat = new Product();
                                         $cat->displayProd();
@@ -205,7 +201,7 @@ if(isset($_POST['deleteUser'])){
                                 <label for="confirmPW">Confirmz vote mot de passe</label>
                                 <input type="password" name="confirmPW">
                                 <select name="droitsNewUser">
-                                            <option>Select</option>
+                                            <option  selected disabled hidden>Select</option>
                                             <?php
                                             $droits = new Droits();
                                             $droits->displayChoice();
@@ -220,7 +216,7 @@ if(isset($_POST['deleteUser'])){
                             <form id="add_user" action="" method="POST">
 
                                 <select name="moddingUser">
-                                    <option>Select</option>
+                                    <option  >Select</option>
                                     <?php
                                     $article = new User();
                                     $article->getDisplay();
@@ -253,7 +249,48 @@ if(isset($_POST['deleteUser'])){
                             </form>
                         </article>
                     </section>
+        <?php 
+            if(isset($_POST['mod'])){
+                $droits = new User();
+                $droits->updateDroit($_POST['moddingUser'], $_POST['droitUser']);
+                $update = new Admin();
+                $update->UpdateNewUser($_POST['moddingUser'], $_POST['UpdateLog'], $_POST['UpdateMail'], $_POST['updatePW'], $_POST['updateCPW']);
+            }
+        ?>
 
+
+                    <?php elseif($_GET['id'] == 'commandes'): ?>
+
+                    <section id="commandes">
+                        <form id="add_user" action="" method="POST">
+
+                                <select name="choiceUser">
+                                    <option  selected disabled hidden>Select</option>
+                                    <?php
+                                    $article = new User();
+                                    $article->getDisplay();
+                                    ?>
+                                </select> <br>
+                            <input type="submit" name="commandes" value="Voir commandes">
+                        </form> <br>
+                            <?php 
+                                if (isset($_POST['commandes'])):
+                                $user = new Admin;
+                                $user->commandes_admin($_POST['choiceUser']);
+                                foreach($_SESSION['commandes'] as $row):
+                            ?>
+
+                                <div class="my_commandes">
+                                    <p> Nom du produits: <?= $row['nom']; ?> </p>
+                                    <img src="../ressources/img/<?= $row['FullNameImg']; ?>" alt="">
+                                    <p>Date de la commande : <?= $row['date']; ?></p>
+                                </div>
+                            <?php 
+                                endforeach; 
+                                endif; 
+                            ?>
+                    </section>
+                    
             <?php endif; ?>
         <?php endif; ?>
 

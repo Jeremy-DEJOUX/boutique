@@ -4,17 +4,23 @@ require_once('../class/classPanier.php');
 require_once('../function/db.php');
 $db = new Db;
 $panier = new Panier($db);
-// var_dump($_SESSION);
 
 $tab = [];
-if (isset($_SESSION['result'])) {
-    foreach ($_SESSION['result'] as $row){
-        array_push($tab, $row['nom']);
+if (isset($_SESSION['panier'])) {
+    $ids = array_keys($_SESSION['panier']);
+    if (empty($ids)) {
+        $prod_panier = array();
+    }else{
+        $prod_panier = $db->query('SELECT * FROM produits WHERE id IN ('.implode(',', $ids).')');
+    }
+    
+    
+    foreach ($prod_panier as $row){
+        array_push($tab, $row->nom);
     }
 }
-
 if (isset($_POST['confirmCommande'])) {
-    $commande = $panier->commande(1, $tab);
+    $commande = $panier->commande($_SESSION['id'], $tab);
 }
 ?>
 
@@ -30,6 +36,12 @@ if (isset($_POST['confirmCommande'])) {
     <?php if (!empty($_SESSION['panier'])): ?>
     
     <main>
+    
+        <nav id="navigation">
+                    <a href="../index.php">Acceuil</a>
+                    <a href="produits.php">Produits</a>
+                    <a href="profil.php">Compte</a>
+        </nav>
         
     <div id="first_box">
         
@@ -132,11 +144,19 @@ if (isset($_POST['confirmCommande'])) {
     <?php else: ?>
 
     <main>
+
+        <nav id="navigation">
+                    <a href="../index.php">Acceuil</a>
+                    <a href="produits.php">Produits</a>
+                    <a href="profil.php">Compte</a>
+        </nav>
+
         <h1>Votre Panier est Vide</h1>
         <p>Remplisser le <a href="produits.php">ici</a></p>
     </main>
 
-    <?php endif; ?>
+    <?php endif;?>
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="../ressources/JS/script.js"></script>
 </body>

@@ -11,11 +11,15 @@ class Admin{
     }
 //------------------------------------------------------Donné les droits -------------------------------------------------------------------------------------
     public function updateDroits($login, $id_droits){
+        if (!empty($id_droits) && !empty($login)){
         $query = $this->db->prepare("UPDATE user SET id_droits=:id WHERE id=:login");
         $query->bindValue(":id", $id_droits, PDO::PARAM_INT);
         $query->bindValue(":login", $login, PDO::PARAM_STR);
         $query->execute();
+    }else {
+        echo "Veuillez remplir tous les champs";
     }
+    }   
 //----------------------------------------Ajout Utilisateur-------------------------------------------------------------------------------
     public function registerNewUser ($login, $email, $password, $confirmPW, $id_droits){
 
@@ -79,8 +83,6 @@ class Admin{
 
         if (!empty($login) && !empty($email) && !empty($password) && !empty($confirmPW)){
 
-            var_dump($old_login);
-
             $cryptedpass = password_hash($password, PASSWORD_BCRYPT); // CRYPTED 
             $update = connect()->prepare("UPDATE user SET login = :login, password = :cryptedpass, email= :mail WHERE login = :old_login"); 
             $update->bindValue(":login", $login, PDO::PARAM_STR);
@@ -106,6 +108,16 @@ class Admin{
         $deleteQuery->bindValue(":login", $login, PDO::PARAM_STR);
         $deleteQuery->execute();
     }
+
+
+    public function commandes_admin($id){
+    $sql = "SELECT * FROM facoprod INNER JOIN produits p ON id_produits = p.id INNER JOIN commandes c ON id_commande = c.id  INNER JOIN user u ON c.id_user = u.id WHERE u.login = :id ORDER BY c.date DESC";
+    $requete = connect()->prepare($sql);
+    $requete->bindValue(':id', $id, PDO::PARAM_INT);
+    $requete->execute();
+    $test = $requete->fetchAll(PDO::FETCH_ASSOC);
+    $_SESSION['commandes'] = $test;
+}
 
 
 }

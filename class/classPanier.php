@@ -64,15 +64,16 @@ class Panier{
         $commande->execute();
 
         if ($commande) {
-
+            echo "Bonjour";
             $prod = connect()->prepare("SELECT * FROM commandes INNER JOIN (SELECT id_user, MAX(date) AS MaxDateTime FROM commandes GROUP BY id_user) groupedtt ON commandes.id_user = groupedtt.id_user AND date = groupedtt.MaxDateTime WHERE commandes.id_user = :id");
             $prod->bindValue(':id', $id, PDO::PARAM_STR);
             $prod->execute();
             $result_com = $prod->fetch(PDO::FETCH_ASSOC);
+            var_dump($result_com);
 
             foreach ($nom as $name){
 
-            
+                echo "Bonsoir";
                 $prod = connect()->prepare("SELECT * FROM produits WHERE nom = :nom");
                 $prod->bindValue(':nom', $name, PDO::PARAM_STR);
                 $prod->execute();
