@@ -13,17 +13,36 @@ main{
     margin: 0;
     padding: 0;
     min-height: 100vh;
-    /* height: 100vh; */
     width: 100%;
     background-color: #495464;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    font-family: 'Montserrat';
 }
 
 @media (min-width: 800px){
-
+     #navigation{
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+        }
+        #navigation a{
+                text-decoration: none;
+                color: #F4F4F2;
+                font-size: 2em;
+                font-family: 'Montserrat';
+                font-weight: 500;
+                padding: 10px;
+            }
+            #navigation a:hover{
+                transition: 0.3s;
+                color: #adb7d1;
+                font-weight: 600;
+            }
     #first_box{
         margin-top: 4%;
         margin-bottom: 4%;
@@ -159,6 +178,62 @@ main{
                 border-bottom: 3px solid #495464;
             }
 
+
+
+
+
+    #payment{
+        width: 70%;
+        height: 40%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        font-family: 'Montserrat';
+    }
+
+        #Adresse_user{
+            width: 30%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+        #payment_user{
+            width: 30%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+            #payment input{
+                border: 1px solid black;
+                border-radius: 15px;
+                width: 100%;
+                height: 30px;
+                text-align: center;
+            }
+
+
+            #confirm{
+                background-color: rgb(244, 244, 242);
+                border: 1px solid black;
+                border-radius: 15px;
+                width: 100%;
+                height: 100%;
+                font-size: 18px;
+                font-family: 'Rhodium Libre';
+            }
+
+                #confirm:hover{
+                    font-weight: bold;
+                    background-color: #495464;
+                    color: rgb(244, 244, 242);
+                }
 
 
 }

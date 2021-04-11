@@ -212,5 +212,16 @@ public function updateDroit($login, $id_droits){
 
 }
 
+
+public function commandes($id){
+    $sql = "SELECT * FROM facoprod INNER JOIN produits p ON id_produits = p.id INNER JOIN commandes c ON id_commande = c.id WHERE c.id_user = :id ORDER BY c.date DESC";
+    $requete = $this->db->prepare($sql);
+    $requete->bindValue(':id', $id, PDO::PARAM_INT);
+    $requete->execute();
+    $test = $requete->fetchAll(PDO::FETCH_ASSOC);
+    var_dump($test);
+    $_SESSION['commandes'] = $test;
+}
+
 }
 ?>

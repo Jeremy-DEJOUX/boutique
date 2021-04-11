@@ -42,8 +42,8 @@ $path_deconnexion='deconnexion.php'
     
             <div id="Filtrage">
                 <form action="" method="post">
-                    <select name="trieCategorie">
-                        <option>Select</option>
+                    <select name="trieCategorie" value="1">
+                        <option value="" selected disabled hidden>Select</option>
                             <?php
                                 $cat = new Categorie();
                                 $cat->displayChoice();
@@ -82,6 +82,8 @@ $path_deconnexion='deconnexion.php'
                 ?>
                     <div class="box_product">
                         <a class="lien_product" href="produit.php?id=<?= $key['id'] ?>"> <img class="img_product" src="../ressources/img/<?= $key['FullNameImg'] ?>" alt="<?= $key['titleImg'] ?>"> </a>
+                        <p> <?= $key['nom']; ?> </p>
+
                     </div>
                         
                 <?php 
@@ -90,6 +92,39 @@ $path_deconnexion='deconnexion.php'
                         echo "no results";
                     endif;
                 else:;
+                ?>
+
+                <?php
+
+                    if(isset($_POST['CategorieChoose'])):
+                        if (isset($_POST['trieCategorie'])):
+                            $search = $_POST['trieCategorie'];
+                            $produits->produitsByCategory($search);
+                            foreach ($_SESSION['categorie'] as $key):
+                ?>
+                    <div class="box_product">
+                        <a class="lien_product" href="produit.php?id=<?= $key['id'] ?>"> <img class="img_product" src="../ressources/img/<?= $key['FullNameImg'] ?>" alt="<?= $key['titleImg'] ?>"> </a>
+                        <p> <?= $key['nom']; ?> </p>
+
+                    </div>
+                        
+                <?php 
+                        endforeach;
+                    else:
+            ?>
+
+                    <?php $products = $db->query("SELECT * FROM produits"); ?>
+                    <?php foreach ($products as $product): ?>
+
+                    <div class="box_product">
+                        <a class="lien_product" href="produit.php?id=<?= $product->id; ?>"> <img class="img_product" src="../ressources/img/<?=$product->FullNameImg ?>" alt=""> </a>
+                        <p> <?= $product->nom; ?> </p>
+                    </div>
+
+                    <?php 
+                    endforeach;
+                    endif;
+                    else:
                 ?>
                 <?php $products = $db->query("SELECT * FROM produits"); ?>
                 <?php foreach ($products as $product): ?>
@@ -102,6 +137,8 @@ $path_deconnexion='deconnexion.php'
                 <?php 
                     endforeach;
                     endif;
+                    
+                endif;
                 ?>
             </div>
 
