@@ -96,7 +96,7 @@ $path_deconnexion='deconnexion.php'
 
                     <div class="box_product">
                         <a class="lien_product" href="produit.php?id=<?= $product->id; ?>"> <img class="img_product" src="../ressources/img/<?=$product->FullNameImg ?>" alt=""> </a>
-                        <p> <?= $product->nom; ?> </p>
+                        <p class="nomJeu"> <?= $product->nom; ?> </p>
                     </div>
 
                 <?php 
