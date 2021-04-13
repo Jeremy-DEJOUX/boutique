@@ -128,6 +128,11 @@ if (isset($_POST["register"])){
 <!-- ================================================================= CONNEXION / INSCRIPTION ============================================================ -->
     <?php else: ?>
         <main>
+        <nav>
+                <a href="../index.php">Acceuil</a>
+                <a href="produits.php">Produits</a>
+                <a href="panier.php">Panier</a>
+            </nav>
             <h2>Connexion</h2>
             <form id="form_connect" action="" method="POST">
                 <label for="login">Login</label>
