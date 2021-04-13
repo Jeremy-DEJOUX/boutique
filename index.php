@@ -13,6 +13,7 @@ $path_panier="pages/panier.php";
 $path_produits="pages/produits.php";
 $path_admin="pages/admin.php";
 $path_footer='../css/footer.css';
+$path_compte='pages/profil.php';
 $path_deconnexion='pages/deconnexion.php'
 
 ?>

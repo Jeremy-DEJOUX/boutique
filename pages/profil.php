@@ -89,6 +89,12 @@ if (isset($_POST["register"])){
 
             <a href="deconnexion.php">Deconnexion</a>
 
+            <?php if (isset($_SESSION['id_droits'])) {
+                if ($_SESSION['id_droits'] == 1337): ?>
+                    <a href="admin.php">Admin</a>
+                <?php endif;
+            } ?>
+
 
             <div id="commandes">
                 <h2>Vos commandes</h2>

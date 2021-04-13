@@ -62,6 +62,7 @@ if(isset($_POST['deleteUser'])){
 
 
         <nav id="navigation">
+            <a href="../index.php">Acceuil</a>
             <a href="admin.php?id=categorie">Cagtegorie</a>
             <a href="admin.php?id=produits">Produits</a>
             <a href="admin.php?id=user">Utilisateurs</a>
@@ -276,7 +277,8 @@ if(isset($_POST['deleteUser'])){
                             <?php 
                                 if (isset($_POST['commandes'])):
                                 $user = new Admin;
-                                $user->commandes_admin($_POST['choiceUser']);
+                                if (isset($_POST['choiceUser'])){
+                                $user->commandes_admin($_POST['choiceUser']);}
                                 foreach($_SESSION['commandes'] as $row):
                             ?>
 

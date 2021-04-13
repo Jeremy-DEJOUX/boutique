@@ -103,7 +103,7 @@ class User
                        $insert->bindValue(":email", $email, PDO::PARAM_STR); 
                     //    $insert->bindValue(); 
                        $insert->execute();
-                       header('location:../index.php'); 
+                       header('location:../pages/profil.php'); 
                     }
                     else {
                         $error_log = "confirmation du mot de passe incorrect"; 
@@ -219,7 +219,6 @@ public function commandes($id){
     $requete->bindValue(':id', $id, PDO::PARAM_INT);
     $requete->execute();
     $test = $requete->fetchAll(PDO::FETCH_ASSOC);
-    var_dump($test);
     $_SESSION['commandes'] = $test;
 }
 

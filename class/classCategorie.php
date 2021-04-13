@@ -36,7 +36,7 @@ class Categorie{
                 $stmt = $this->db->prepare("INSERT INTO categories (nom_cat) VALUES (:nom)");
                 $stmt->bindValue(':nom', $name, PDO::PARAM_STR);
                 $stmt->execute();
-                header('Location: ../pages/produits.php?=success');
+                header('Location: ../pages/admin.php');
             }
         }
     }
